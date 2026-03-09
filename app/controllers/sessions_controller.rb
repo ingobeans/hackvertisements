@@ -46,9 +46,10 @@ class SessionsController < ApplicationController
       else
         puts "WELCOME back"
         existing_user["token"] = data["access_token"]
-        existing_user.save
         session[:user_id] = existing_user
+        existing_user.save
       end
+      redirect_to root_path
     end
   end
 end
