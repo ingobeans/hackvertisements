@@ -35,10 +35,20 @@ class SessionsController < ApplicationController
         response.body
       end
       
+      puts body
       user_data = JSON.parse(body)
-      puts user_data["nickname"]
-
-      session[:user_id] = User.new({"uid":data["access_token"], "name":user_data["nickname"]})
+      existing_user = User.where(uid:user_data["slack_id"]).first()
+      if existing_user == nil
+        puts "NEW USER ALERT!!!"
+        user = User.new({"uid":user_data["slack_id"], "token":data["access_token"], "name":user_data["nickname"]})
+        session[:user_id] = user
+        user.save
+      else
+        puts "WELCOME back"
+        existing_user["token"] = data["access_token"]
+        existing_user.save
+        session[:user_id] = existing_user
+      end
     end
   end
 end

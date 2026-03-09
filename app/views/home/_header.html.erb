@@ -15,7 +15,7 @@
         <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
           <% if session[:user_id] == nil %>
             <li class="nav-item">
-              <a class="btn btn-primary" href="http://auth.hackclub.com/oauth/authorize?client_id=<%= ENV['CLIENT_ID'] %>&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Fauth%2F%3Aprovider%2Fcallback&response_type=code&scope=openid+profile">Sign in with Hack club</a>  
+              <a class="btn btn-primary" href="http://auth.hackclub.com/oauth/authorize?client_id=<%= ENV['CLIENT_ID'] %>&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Fauth%2F%3Aprovider%2Fcallback&response_type=code&scope=slack_id+profile+openid">Sign in with Hack club</a>  
             </li>
           <% else %>
             <li class="nav-item">
