@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @hackvertisement %>
+
+<div>
+  <%= link_to "Edit this hackvertisement", edit_hackvertisement_path(@hackvertisement) %> |
+  <%= link_to "Back to hackvertisements", hackvertisements_path %>
+
+  <%= button_to "Destroy this hackvertisement", @hackvertisement, method: :delete %>
+</div>

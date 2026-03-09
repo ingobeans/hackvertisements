@@ -1,0 +1,16 @@
+<p style="color: green"><%= notice %></p>
+
+<% content_for :title, "Hackvertisements" %>
+
+<h1>Hackvertisements</h1>
+
+<div id="hackvertisements">
+  <% @hackvertisements.each do |hackvertisement| %>
+    <%= render hackvertisement %>
+    <p>
+      <%= link_to "Show this hackvertisement", hackvertisement %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New hackvertisement", new_hackvertisement_path %>

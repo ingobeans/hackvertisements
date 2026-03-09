@@ -1,0 +1,37 @@
+<%= form_with(model: hackvertisement) do |form| %>
+  <% if hackvertisement.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(hackvertisement.errors.count, "error") %> prohibited this hackvertisement from being saved:</h2>
+
+      <ul>
+        <% hackvertisement.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :user_id, style: "display: block" %>
+    <%= form.text_field :user_id %>
+  </div>
+
+  <div>
+    <%= form.label :date, style: "display: block" %>
+    <%= form.date_field :date %>
+  </div>
+
+  <div>
+    <%= form.label :data, style: "display: block" %>
+    <%= form.text_field :data %>
+  </div>
+
+  <div>
+    <%= form.label :link, style: "display: block" %>
+    <%= form.text_field :link %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

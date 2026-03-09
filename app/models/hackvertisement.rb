@@ -1,0 +1,2 @@
+class Hackvertisement < ApplicationRecord
+end
