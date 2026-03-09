@@ -19,7 +19,7 @@
             </li>
           <% else %>
             <li class="nav-item">
-              <a class="btn" href=""><%= session[:user_id]["name"] %></a>  
+              <%= link_to session[:user_id]["name"] + " - Sign out", auth_delete_path, class:"btn" %>
             </li>
           <% end %>
         </ul>
