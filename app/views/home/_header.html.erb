@@ -19,7 +19,10 @@
             </li>
           <% else %>
             <li class="nav-item" data-turbo-prefetch="false">
-              <%= link_to session[:user_id]["name"] + " - Sign out", auth_delete_path, class:"btn" %>
+            <%= link_to auth_delete_path, class:"btn" do %>
+              <%= session[:user_id]["name"] %> - Sign out
+              <img style="height: 23px;" src="<%= session[:user_id]["pfp"]  %>">
+            <% end %>
             </li>
           <% end %>
         </ul>

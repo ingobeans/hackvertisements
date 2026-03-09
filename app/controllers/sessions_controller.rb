@@ -5,6 +5,10 @@ class SessionsController < ApplicationController
     session[:user_id] = nil
     redirect_to root_path
   end
+  def wipe
+    User.delete_all
+    redirect_to root_path
+  end
   def create
     puts "hi, im gonna try to authenticate now :3"
     uri = URI.parse('https://auth.hackclub.com/oauth/token')
@@ -36,9 +40,19 @@ class SessionsController < ApplicationController
       puts body
       user_data = JSON.parse(body)
       existing_user = User.where(uid:user_data["slack_id"]).first()
+
       if existing_user == nil
         puts "NEW USER ALERT!!!"
-        user = User.new({"uid":user_data["slack_id"], "token":data["access_token"], "name":user_data["nickname"]})
+        
+        uri = URI.parse("https://cachet.dunkirk.sh/users/"+user_data["slack_id"])
+        hostname = uri.hostname
+        req = Net::HTTP::Get.new(uri)
+        res = Net::HTTP.start(uri.host, uri.port, use_ssl: uri.scheme == 'https') do |http|
+          http.request(req)
+        end
+        slack_data = JSON.parse(res.body)
+        
+        user = User.new({"uid":user_data["slack_id"], "token":data["access_token"], "name":slack_data["displayName"], "pfp":slack_data["imageUrl"]})
         session[:user_id] = user
         user.save
       else

@@ -4,6 +4,7 @@ Rails.application.routes.draw do
 
   get '/auth/delete', to: 'sessions#delete'
   get '/auth/:provider/callback', to: 'sessions#create'
+  get '/auth/wipe', to: 'sessions#wipe'
   
   root "home#index"
 end
