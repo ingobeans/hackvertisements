@@ -28,14 +28,17 @@ class SessionsController < ApplicationController
       uri = URI.parse("https://auth.hackclub.com/oauth/userinfo")
       headers = {'Authorization': 'Bearer ' + data["access_token"]}
 
-      Net::HTTP.start(uri.host, uri.port, use_ssl: uri.scheme == 'https') do |http|
+      body = Net::HTTP.start(uri.host, uri.port, use_ssl: uri.scheme == 'https') do |http|
         req = Net::HTTP::Get.new(uri)
         req['Authorization'] = 'Bearer ' + data["access_token"]
         response = http.request(req)
-        puts response.body
+        response.body
       end
+      
+      user_data = JSON.parse(body)
+      puts user_data["nickname"]
 
-      session[:user_id] = User.new({"uid":data["access_token"]})
+      session[:user_id] = User.new({"uid":data["access_token"], "name":user_data["nickname"]})
     end
   end
 end
