@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_03_09_141408) do
+ActiveRecord::Schema[8.1].define(version: 2026_03_09_165427) do
   create_table "hackvertisements", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.binary "data"
@@ -18,5 +18,11 @@ ActiveRecord::Schema[8.1].define(version: 2026_03_09_141408) do
     t.string "link"
     t.datetime "updated_at", null: false
     t.string "user_id"
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.string "uid"
+    t.datetime "updated_at", null: false
   end
 end
