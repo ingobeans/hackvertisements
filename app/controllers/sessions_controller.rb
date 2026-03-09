@@ -35,8 +35,7 @@ class SessionsController < ApplicationController
         puts response.body
       end
 
-      @user = User.new
-      
+      session[:user_id] = User.new({"uid":data["access_token"]})
     end
   end
 end
