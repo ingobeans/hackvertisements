@@ -6,7 +6,6 @@ class SessionsController < ApplicationController
     redirect_to root_path
   end
   def create
-    user_info = request.env['omniauth.auth']
     puts "hi, im gonna try to authenticate now :3"
     uri = URI.parse('https://auth.hackclub.com/oauth/token')
     data = '{

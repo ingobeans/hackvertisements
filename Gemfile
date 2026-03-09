@@ -18,11 +18,6 @@ gem "solid_cable"
 
 gem 'dotenv', '~> 3.2'
 
-# auth
-gem 'omniauth', '~> 2.1', '>= 2.1.4'
-gem 'omniauth-rails_csrf_protection', '~> 2.0', '>= 2.0.1'
-gem 'omniauth_openid_connect'
-
 
 gem "bootsnap", require: false
 
