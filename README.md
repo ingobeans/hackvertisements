@@ -1,24 +1,8 @@
-# README
+# Hackvertisements
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Show off your hackclub projects with *hackvertisements*!
 
-Things you may want to cover:
+Hackvertisements are small banner embeds you can add to your website. Every time it is loaded, it will display a random hackvertisement submitted by fellow hackclubbers, showcasing off a certified cool project :3
 
-* Ruby version
+Everything is completely free in every sense of the word and the hackvertisements may not be commercial in any way. This is **not** a place to advertise your vibecoded business. This is however a place for you to showcase that project you're super passionate about!!
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
