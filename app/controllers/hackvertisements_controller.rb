@@ -21,7 +21,11 @@ class HackvertisementsController < ApplicationController
 
   # POST /hackvertisements or /hackvertisements.json
   def create
-    @hackvertisement = Hackvertisement.new(hackvertisement_params)
+    data = params.expect(hackvertisement: [ :data, :link ])
+    puts data["data"].class
+    puts "wa"
+
+    @hackvertisement = Hackvertisement.new
 
     respond_to do |format|
       if @hackvertisement.save
