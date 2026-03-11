@@ -5,8 +5,6 @@ from werkzeug.utils import secure_filename
 from datetime import datetime
 import os, json, time, random, io
 
-version = "0.2.5"
-
 app = Flask(__name__)
 cors = CORS(app)
 
