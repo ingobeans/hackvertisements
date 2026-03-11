@@ -2,3 +2,22 @@
 <p>welcome to the hackvertisements dashboard!</p>
 
 <%= link_to "Upload a hackvertisement!", new_hackvertisement_path, class: "btn btn-primary" %>
+
+<br>
+<br>
+
+<% if @hackvertisements.count == 0 %>
+    <p>you dont currently have any hackvertisements, you should totally make one!!</p>
+<% else %>
+    <h3>your hackvertisements:</h3>
+    <div style="margin-left:20px">
+        <% @hackvertisements.each do |hackvertisement| %>
+        <div style="background-color: #d2d2d2; padding: 5px; width: fit-content; height: fit-content; margin-bottom: 5px;">
+        <img src="<%= hackvertisement['data'] %>">
+        <p>
+            <%= link_to "Show this hackvertisement", hackvertisement %>
+        </p>
+        </div>
+        <% end %>
+    </div>
+<% end %>
