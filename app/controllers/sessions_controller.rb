@@ -1,6 +1,18 @@
 require 'net/http'
 
 class SessionsController < ApplicationController
+  def dev
+    target_uid = params["uid"]
+    puts target_uid
+    existing_user = User.where(uid:target_uid).first()
+    if existing_user == nil
+      puts "naurr!!!! dev login failed cause that user id doesnt belong to a user???"
+      redirect_to root_path
+    end
+    puts "you're logged in now!! you go girl!"
+    session[:user_id] = existing_user
+    redirect_to root_path
+  end
   def delete
     session[:user_id] = nil
     redirect_to root_path
