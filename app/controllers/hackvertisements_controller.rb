@@ -14,6 +14,9 @@ class HackvertisementsController < ApplicationController
 
   # GET /hackvertisements/new
   def new
+    if session[:user_id] == nil
+      redirect_to root_path
+    end
     @hackvertisement = Hackvertisement.new
   end
 
@@ -23,6 +26,9 @@ class HackvertisementsController < ApplicationController
 
   # POST /hackvertisements or /hackvertisements.json
   def create
+    if session[:user_id] == nil
+      redirect_to root_path
+    end
     data = params.expect(hackvertisement: [ :data, :link ])
     puts data["data"].class
     filename = data["data"].original_filename
