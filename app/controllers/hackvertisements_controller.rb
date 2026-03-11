@@ -2,7 +2,7 @@ require 'net/http'
 
 class HackvertisementsController < ApplicationController
   before_action :set_hackvertisement, only: %i[ show edit update destroy ]
-  
+
   def wipe
     Hackvertisement.delete_all
     redirect_to root_path
@@ -53,7 +53,7 @@ class HackvertisementsController < ApplicationController
     image_url = response["url"]
 
     @hackvertisement = Hackvertisement.new({"data": response["url"], "link":data["link"], "user_id":session[:user_id]["uid"]})
-    if session[:user_id]["posts"] == "" 
+    if session[:user_id]["posts"] == "" or session[:user_id]["posts"] == nil
       session[:user_id]["posts"] = @hackvertisement["id"]
     else
       session[:user_id]["posts"] = session[:user_id]["posts"] + "," + @hackvertisement["id"]
