@@ -41,7 +41,13 @@ class HackvertisementsController < ApplicationController
     response = JSON.parse(response.body)
     image_url = response["url"]
 
-    @hackvertisement = Hackvertisement.new
+    @hackvertisement = Hackvertisement.new({"data": response["url"], "link":data["link"], "user_id":session[:user_id]["uid"]})
+    if session[:user_id]["posts"] == "" 
+      session[:user_id]["posts"] = @hackvertisement["id"]
+    else
+      session[:user_id]["posts"] = session[:user_id]["posts"] + "," + @hackvertisement["id"]
+    end
+    puts session[:user_id]["posts"] 
 
     respond_to do |format|
       if @hackvertisement.save
