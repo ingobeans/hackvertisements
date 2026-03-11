@@ -10,10 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_03_10_135849) do
+ActiveRecord::Schema[8.1].define(version: 2026_03_11_171231) do
   create_table "hackvertisements", force: :cascade do |t|
     t.datetime "created_at", null: false
-    t.binary "data"
+    t.string "data"
     t.date "date"
     t.string "link"
     t.datetime "updated_at", null: false
