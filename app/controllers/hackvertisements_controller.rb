@@ -2,6 +2,11 @@ require 'net/http'
 
 class HackvertisementsController < ApplicationController
   before_action :set_hackvertisement, only: %i[ show edit update destroy ]
+  
+  def wipe
+    Hackvertisement.delete_all
+    redirect_to root_path
+  end
 
   # GET /hackvertisements or /hackvertisements.json
   def index
