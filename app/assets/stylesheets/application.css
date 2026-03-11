@@ -8,3 +8,88 @@
  *
  * Consider organizing styles into separate files for maintainability.
  */
+body {
+    background-color: #CECDFF;
+    font-family: 'Times New Roman', Times, serif;
+    margin: 0;
+}
+
+.navbar {
+    background-color: white;
+    border-bottom: 1px solid black;
+    height: 48px;
+}
+
+.navbar>a {
+    margin-right: 6px;
+    margin-top: 2px;
+    padding: 6px;
+    padding-right: 15px;
+    float: right
+}
+
+.navbar>a>img {
+    height: 20px;
+    transform: scale(1.6) translateY(1px);
+    margin-left: 5px;
+}
+
+.centered {
+    margin-left: 50%;
+    transform: translateX(-50%);
+    width: fit-content;
+}
+
+.linkbutton {
+    padding: 15px;
+    background-color: #4EE055;
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    border-radius: 10px;
+    font-size: 22px;
+    box-shadow: 4px 4px black;
+    border: solid 1px black;
+}
+
+.linkbutton:hover {
+    background-color: #45c94c;
+}
+
+.linkbutton:active {
+    background-color: #2c8b31;
+}
+
+.container {
+    background-color: #F2FFEF;
+    border: solid 2px black;
+    width: 100%;
+    max-width: 790px;
+    padding: 40px;
+    padding-top: 0;
+    margin-top: 60px;
+    margin-left: 50%;
+    transform: translateX(-50%);
+}
+
+h1 {
+    font-size: 49px;
+    font-weight: normal;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    text-align: center;
+}
+
+p {
+    font-size: 22px;
+    line-height: 30px;
+}
+
+.subtitle {
+    margin-top: 0;
+    text-align: center;
+}
+
+a {
+    text-decoration: none;
+    color: #A100FF;
+}
