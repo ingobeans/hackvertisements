@@ -1,3 +1,5 @@
+require 'net/http'
+
 class HackvertisementsController < ApplicationController
   before_action :set_hackvertisement, only: %i[ show edit update destroy ]
 
@@ -23,7 +25,21 @@ class HackvertisementsController < ApplicationController
   def create
     data = params.expect(hackvertisement: [ :data, :link ])
     puts data["data"].class
-    puts "wa"
+    filename = data["data"].original_filename
+    ext = filename.split(".")[-1]
+    cdn_url = ENV["CDN_BASE_URL"] + "/api/v4/upload"
+    puts "sending to " + cdn_url
+    uri = URI(cdn_url)
+    request = Net::HTTP::Post.new(uri)
+    request['Authorization'] = 'Bearer ' + ENV["CDN_KEY"]
+    form_data = [['file', data["data"].read, {filename: "hackvertisement."+ext}]]
+    request.set_form(form_data, 'multipart/form-data')
+    response = Net::HTTP.start(uri.hostname, uri.port, use_ssl: !Rails.env.development?) do |http|
+      http.request(request)
+    end
+    puts "yay!!!"
+    response = JSON.parse(response.body)
+    image_url = response["url"]
 
     @hackvertisement = Hackvertisement.new
 
