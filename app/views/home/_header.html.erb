@@ -1,8 +1,11 @@
 <% if session[:user_id] != nil %>
   <div class="navbar">
-  <%= link_to auth_delete_path, class:"linkbutton" do %>
-    <%= session[:user_id]["name"] %> - Sign out
-    <img src="<%= session[:user_id]["pfp"]  %>">
-  <% end %>
+    <%= link_to "Home", root_path %>
+    *
+    <%= link_to "My stuff", root_path %>
+    <%= link_to auth_delete_path, class:"linkbutton" do %>
+      <%= session[:user_id]["name"] %> - Sign out
+      <img src="<%= session[:user_id]["pfp"]  %>">
+    <% end %>
   </div>
 <% end %>
