@@ -45,6 +45,7 @@ body {
     height: 100vh;
     overflow: hidden;
     z-index: 500;
+    pointer-events: none;
 }
 
 .toadcan>img {
