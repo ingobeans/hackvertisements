@@ -51,7 +51,7 @@ body {
 .toadcan>img {
     width: 120px;
     rotate: 5deg;
-    margin-top: 65px;
+    margin-top: 26px;
     margin-left: calc(100vw - (100vw - min(790px, 100vw)) / 2);
 }
 
