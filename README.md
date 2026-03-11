@@ -6,3 +6,21 @@ Hackvertisements are small banner embeds you can add to your website. Every time
 
 Everything is completely free in every sense of the word and the hackvertisements may not be commercial in any way. This is **not** a place to advertise your vibecoded business. This is however a place for you to showcase that project you're super passionate about!!
 
+## Running locally
+
+Install Ruby on Rails (good luck).
+
+Clone this :-)
+
+Then i think you need to do `bundle install`.
+
+Do `rails db:create db:migrate` i think ?
+
+Then you probably want to set up the .env file! Create an application at auth.hackclub.com
+
+And then you can run the server with `rails s` and hope it works!!
+
+There's also a local CDN test server that is used for development to not send requests to the real Hackclub CDN during development.
+The local CDN test server can be run with python (flask):
+
+`python fake_cdn.py`
