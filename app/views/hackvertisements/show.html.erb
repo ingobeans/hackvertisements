@@ -1,6 +1,15 @@
 <p style="color: green"><%= notice %></p>
 
-<%= render @hackvertisement %>
+<img src="<%= @hackvertisement['data'] %>">
+
+<br>
+
+<span>Url: <a href="<%= @hackvertisement['link'] %>"><pre style="display:inline"><%= @hackvertisement['link'] %></pre></a></span>
+<br>
+<span>Created at: <pre style="display:inline"><%= @hackvertisement['created_at'] %></pre></span>
+
+<br>
+<br>
 
 <div>
   <%= link_to "Edit this hackvertisement", edit_hackvertisement_path(@hackvertisement) %> |
