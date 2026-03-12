@@ -16,7 +16,7 @@ Then i think you need to do `bundle install`.
 
 Do `rails db:create db:migrate` i think ?
 
-Then you probably want to set up the .env file! Create an application at auth.hackclub.com
+Then you probably want to set up the .env file! Run `cp .env.example .env`, then open .env and follow the instructions there.
 
 And then you can run the server with `rails s` and hope it works!!
 
