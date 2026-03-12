@@ -1,6 +1,7 @@
 require 'net/http'
 
 class HackvertisementsController < ApplicationController
+  before_action :check_logged_in
   before_action :set_hackvertisement, only: %i[ show edit update destroy ]
 
   def wipe
@@ -19,24 +20,18 @@ class HackvertisementsController < ApplicationController
 
   # GET /hackvertisements/new
   def new
-    if session[:user_id] == nil
-      redirect_to root_path
-    end
     @hackvertisement = Hackvertisement.new
   end
 
   # GET /hackvertisements/1/edit
   def edit
-    if session[:user_id] == nil or @hackvertisement["user_id"] != session[:user_id]["uid"]
+    if @hackvertisement["user_id"] != session[:user_id]["uid"]
       redirect_to root_path
     end
   end
 
   # POST /hackvertisements or /hackvertisements.json
   def create
-    if session[:user_id] == nil
-      redirect_to root_path
-    end
     data = params.expect(hackvertisement: [ :data, :link ])
     puts data["data"].class
     response = upload_image(data["data"])
@@ -62,7 +57,7 @@ class HackvertisementsController < ApplicationController
 
   # PATCH/PUT /hackvertisements/1 or /hackvertisements/1.json
   def update
-    if session[:user_id] == nil or @hackvertisement["user_id"] != session[:user_id]["uid"]
+    if @hackvertisement["user_id"] != session[:user_id]["uid"]
       redirect_to root_path
     end
     form_params = params["hackvertisement"]
@@ -101,6 +96,12 @@ class HackvertisementsController < ApplicationController
   end
 
   private
+    def check_logged_in
+      if session[:user_id] == nil
+        redirect_to root_path
+      end
+    end
+
     def upload_image(data)
       filename = data.original_filename
       puts "uploading " + filename
