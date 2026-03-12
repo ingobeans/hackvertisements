@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   get '/auth/wipe', to: 'sessions#wipe'
 
   get '/dashboard', to: 'home#dashboard'
+  get '/serve', to: 'home#serve'
   
   root "home#index"
 end

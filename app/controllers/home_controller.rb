@@ -11,4 +11,13 @@ class HomeController < ApplicationController
       render "dashboard"
     end
   end
+
+  # serves the random hackvertisement for embeds!
+  def serve
+    # pick random entry.
+    # i got this code from stack overflow dw i dont know how this works either :3
+    @entry = Hackvertisement.order("RANDOM()").first
+
+    render "embed", :layout => false
+  end
 end
