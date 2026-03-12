@@ -26,7 +26,11 @@ body {
     margin-right: 10px;
 }
 
-.navbar>.linkbutton {
+.navbar>div {
+    display: inline;
+}
+
+.navbar>div>.linkbutton {
     margin-right: 6px;
     margin-top: 2px;
     padding: 8px;
@@ -35,6 +39,22 @@ body {
     float: right;
     background-color: black;
     box-shadow: none;
+}
+
+.navbar>div>.linkbutton:hover {
+
+    background-color: rgb(32, 32, 32);
+}
+
+.navbar>div>.linkbutton:active {
+
+    background-color: rgb(45, 43, 54);
+}
+
+.navbar>div>.linkbutton>img {
+    height: 20px;
+    transform: scale(1.6) translateY(1px);
+    margin-left: 5px;
 }
 
 .toadcan {
@@ -77,22 +97,6 @@ body {
 
 .user-hackvertisement>a:hover {
     text-decoration: underline;
-}
-
-.navbar>.linkbutton:hover {
-
-    background-color: rgb(32, 32, 32);
-}
-
-.navbar>.linkbutton:active {
-
-    background-color: rgb(45, 43, 54);
-}
-
-.navbar>.linkbutton>img {
-    height: 20px;
-    transform: scale(1.6) translateY(1px);
-    margin-left: 5px;
 }
 
 .centered {
