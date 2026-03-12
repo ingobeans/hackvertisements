@@ -40,7 +40,7 @@
       <%= form.label :data do %>
         <span class="smol linkbutton">Upload image</span>
       <% end %>
-      <%= form.file_field :data, style:"display:none", onchange:"readURL(this);" %>
+      <%= form.file_field :data, accept:"image/*", style:"display:none", onchange:"readURL(this);" %>
     </div>
     <br>
     <div>
