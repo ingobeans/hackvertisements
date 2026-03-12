@@ -26,7 +26,7 @@ class HackvertisementsController < ApplicationController
   # GET /hackvertisements/1/edit
   def edit
     if @hackvertisement["user_id"] != session[:user_id]["uid"]
-      redirect_to root_path
+      redirect_to dashboard_path, notice: "This hackvertisement isn't yours, buckaroo.", status: :see_other
     end
   end
 
@@ -58,7 +58,7 @@ class HackvertisementsController < ApplicationController
   # PATCH/PUT /hackvertisements/1 or /hackvertisements/1.json
   def update
     if @hackvertisement["user_id"] != session[:user_id]["uid"]
-      redirect_to root_path
+      redirect_to dashboard_path, notice: "This hackvertisement isn't yours, buckaroo.", status: :see_other
     end
     form_params = params["hackvertisement"]
     new_image = form_params["data"]
@@ -87,6 +87,9 @@ class HackvertisementsController < ApplicationController
 
   # DELETE /hackvertisements/1 or /hackvertisements/1.json
   def destroy
+    if @hackvertisement["user_id"] != session[:user_id]["uid"]
+      redirect_to dashboard_path, notice: "This hackvertisement isn't yours, buckaroo.", status: :see_other
+    end
     @hackvertisement.destroy!
 
     respond_to do |format|
