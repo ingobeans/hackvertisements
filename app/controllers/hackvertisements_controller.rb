@@ -3,6 +3,7 @@ require 'net/http'
 class HackvertisementsController < ApplicationController
   before_action :check_logged_in
   before_action :set_hackvertisement, only: %i[ show edit update destroy ]
+  before_action :check_user, only: %i[ edit update destroy]
 
   def wipe
     Hackvertisement.delete_all
@@ -25,9 +26,6 @@ class HackvertisementsController < ApplicationController
 
   # GET /hackvertisements/1/edit
   def edit
-    if @hackvertisement["user_id"] != session[:user_id]["uid"]
-      redirect_to dashboard_path, notice: "This hackvertisement isn't yours, buckaroo.", status: :see_other
-    end
   end
 
   # POST /hackvertisements or /hackvertisements.json
@@ -57,9 +55,6 @@ class HackvertisementsController < ApplicationController
 
   # PATCH/PUT /hackvertisements/1 or /hackvertisements/1.json
   def update
-    if @hackvertisement["user_id"] != session[:user_id]["uid"]
-      redirect_to dashboard_path, notice: "This hackvertisement isn't yours, buckaroo.", status: :see_other
-    end
     form_params = params["hackvertisement"]
     new_image = form_params["data"]
     image_url = @hackvertisement["data"]
@@ -87,9 +82,6 @@ class HackvertisementsController < ApplicationController
 
   # DELETE /hackvertisements/1 or /hackvertisements/1.json
   def destroy
-    if @hackvertisement["user_id"] != session[:user_id]["uid"]
-      redirect_to dashboard_path, notice: "This hackvertisement isn't yours, buckaroo.", status: :see_other
-    end
     @hackvertisement.destroy!
 
     respond_to do |format|
@@ -99,6 +91,12 @@ class HackvertisementsController < ApplicationController
   end
 
   private
+    def check_user
+      if @hackvertisement["user_id"] != session[:user_id]["uid"]
+        redirect_to dashboard_path, notice: "This hackvertisement isn't yours, buckaroo.", status: :see_other
+      end
+    end
+
     def check_logged_in
       if session[:user_id] == nil
         redirect_to root_path
