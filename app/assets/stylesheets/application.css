@@ -192,7 +192,7 @@ input {
     margin-left: calc(100vw - (100vw - min(790px, 100vw)) / 2);
 }
 
-.user-hackvertisement>a>img {
+.user-hackvertisement>.user-img>img {
     width: 100%;
 }
 

@@ -14,10 +14,13 @@
             <div id="hackvertisements">
                 <% @hackvertisements.each do |hackvertisement| %>
                     <div class="user-hackvertisement">
-                        <%= link_to hackvertisement["link"] do  %>
+                        <%= link_to hackvertisement["link"], class:"user-img" do  %>
                             <img src="<%= hackvertisement['data'] %>">
                         <% end %>
-                        <%= link_to "click to edit me", edit_hackvertisement_path(hackvertisement)  %>
+                        <%= link_to edit_hackvertisement_path(hackvertisement) do %>
+                            <%= image_tag("pen.png") %> 
+                            click to edit me
+                        <% end %>
                     </div>
                 <% end %>
             </div>
