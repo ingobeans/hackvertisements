@@ -16,7 +16,7 @@ class SessionsController < ApplicationController
     end
     puts "you're logged in now!! you go girl!"
     session[:user_id] = existing_user
-    redirect_to root_path
+    redirect_to dashboard_path
   end
   def delete
     session[:user_id] = nil
@@ -78,7 +78,7 @@ class SessionsController < ApplicationController
         session[:user_id] = existing_user
         existing_user.save
       end
-      redirect_to root_path
+      redirect_to dashboard_path
     end
   end
 end
