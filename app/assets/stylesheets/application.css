@@ -96,13 +96,17 @@ body {
     background-color: #2c8b31;
 }
 
+.container>div {
+    margin: 40px;
+    padding-bottom: 40px;
+}
+
 .container {
     background-color: #F2FFEF;
-    border: solid 2px black;
+    outline: solid 2px black;
     width: 100%;
-    max-width: 790px;
-    padding: 40px;
-    padding-top: 0;
+    max-width: 846px;
+    padding: 0;
     margin-top: 60px;
     margin-left: 50%;
     transform: translateX(-50%);

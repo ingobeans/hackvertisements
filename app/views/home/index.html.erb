@@ -3,32 +3,36 @@
 </div>
 
 <div class="container">
-    <h1>hiya!! welcome to hackvertisements!!</h1>
-    <p class="subtitle">fun, free showcase of your projects!!</p>
-    <hr>
-    <p>Anyone can create and upload a Hackvertisement, hell, you can even upload two!
-    Anyone can also embed a Hackvertisement into their own website, like this: </p>
+    <div>
+        <h1>hiya!! welcome to hackvertisements!!</h1>
+        <p class="subtitle">fun, free showcase of your projects!!</p>
+        <hr>
+        <p>Anyone can create and upload a Hackvertisement, hell, you can even upload two!
+        Anyone can also embed a Hackvertisement into their own website, like this: </p>
 
-    <!-- placeholder -->
-    <div style="width:722px;height:84px; background-color: #82dcff; border: 2px inset;margin-left: 50%; transform: translateX(-50%);"></div>
+        <!-- placeholder -->
+        <div style="width:722px;height:84px; background-color: #82dcff; border: 2px inset;margin-left: 50%; transform: translateX(-50%);"></div>
 
-    <p>Made by: <a href="https://hackclub.enterprise.slack.com/team/U098P9DLUGJ">@iris</a></p>
+        <p>Made by: <a href="https://hackclub.enterprise.slack.com/team/U098P9DLUGJ">@iris</a></p>
 
-    <% if !@logged_in %>
-        <div class="centered">
-            <a class="linkbutton" href="http://auth.hackclub.com/oauth/authorize?client_id=<%= ENV['CLIENT_ID'] %>&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Fauth%2F%3Aprovider%2Fcallback&response_type=code&scope=slack_id+profile+openid">Sign in with Hack club</a>  
-        </div> 
-    <% end %>
+        <% if !@logged_in %>
+            <div class="centered">
+                <a class="linkbutton" href="http://auth.hackclub.com/oauth/authorize?client_id=<%= ENV['CLIENT_ID'] %>&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Fauth%2F%3Aprovider%2Fcallback&response_type=code&scope=slack_id+profile+openid">Sign in with Hack club</a>  
+            </div> 
+        <% end %>
+    </div>
 </div>
 
 <% if !@logged_in and Rails.env.development?  %>
     <div class="container">
-        <h2>woaww,, you're a dev! heres the secret dev login :3</h2>
-        <p>login by user id (UID)</p>
+        <div>
+            <h2>woaww,, you're a dev! heres the secret dev login :3</h2>
+            <p>login by user id (UID)</p>
 
-        <form action="/auth/dev">
-            <input name="uid" type="text">
-            <input type="submit">
-        </form
+            <form action="/auth/dev">
+                <input name="uid" type="text">
+                <input type="submit">
+            </form
+        </div>
     </div>
 <% end %>
