@@ -2,15 +2,19 @@
     <div>
         <h1>your hackvertisements:</h1>
         
-        <div id="hackvertisements">
-        <% Hackvertisement.where(user_id:session[:user_id]["uid"]).each do |hackvertisement| %>
-            <div class="user-hackvertisement">
-                <%= link_to hackvertisement["link"] do  %>
-                    <img src="<%= hackvertisement['data'] %>">
+        <% if @hackvertisements.count > 0 %>
+            <div id="hackvertisements">
+                <% @hackvertisements.each do |hackvertisement| %>
+                    <div class="user-hackvertisement">
+                        <%= link_to hackvertisement["link"] do  %>
+                            <img src="<%= hackvertisement['data'] %>">
+                        <% end %>
+                        <%= link_to "click to edit me", hackvertisement  %>
+                    </div>
                 <% end %>
-                <%= link_to "click to edit me", hackvertisement  %>
             </div>
+        <% else %>
+            <p>you dont have any hackvertisements yet. go make one!!</p>
         <% end %>
-        </div>
     </div>
 </div>
