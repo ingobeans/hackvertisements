@@ -1,12 +1,9 @@
 <% content_for :title, "Editing hackvertisement" %>
 
-<h1>Editing hackvertisement</h1>
-
-<%= render "form", hackvertisement: @hackvertisement %>
-
-<br>
-
-<div>
-  <%= link_to "Show this hackvertisement", @hackvertisement %> |
-  <%= link_to "Back to hackvertisements", hackvertisements_path %>
+<div class="container">
+  <div>
+    <h1>editing a hackvertisement</h1>
+    <%= render "form", hackvertisement: @hackvertisement %>
+    <br>
+  </div>
 </div>

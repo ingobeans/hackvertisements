@@ -27,6 +27,9 @@ class HackvertisementsController < ApplicationController
 
   # GET /hackvertisements/1/edit
   def edit
+    if session[:user_id] == nil or @hackvertisement["user_id"] != session[:user_id]["uid"]
+      redirect_to root_path
+    end
   end
 
   # POST /hackvertisements or /hackvertisements.json
@@ -36,21 +39,7 @@ class HackvertisementsController < ApplicationController
     end
     data = params.expect(hackvertisement: [ :data, :link ])
     puts data["data"].class
-    filename = data["data"].original_filename
-    ext = filename.split(".")[-1]
-    cdn_url = ENV["CDN_BASE_URL"] + "/api/v4/upload"
-    puts "sending to " + cdn_url
-    uri = URI(cdn_url)
-    request = Net::HTTP::Post.new(uri)
-    request['Authorization'] = 'Bearer ' + ENV["CDN_KEY"]
-    form_data = [['file', data["data"].read, {filename: "hackvertisement."+ext}]]
-    request.set_form(form_data, 'multipart/form-data')
-    response = Net::HTTP.start(uri.hostname, uri.port, use_ssl: !Rails.env.development?) do |http|
-      http.request(request)
-    end
-    puts "yay!!!"
-    response = JSON.parse(response.body)
-    image_url = response["url"]
+    response = upload_image(data["data"])
 
     @hackvertisement = Hackvertisement.new({"data": response["url"], "link":data["link"], "user_id":session[:user_id]["uid"]})
     if session[:user_id]["posts"] == "" or session[:user_id]["posts"] == nil
@@ -73,8 +62,25 @@ class HackvertisementsController < ApplicationController
 
   # PATCH/PUT /hackvertisements/1 or /hackvertisements/1.json
   def update
+    if session[:user_id] == nil or @hackvertisement["user_id"] != session[:user_id]["uid"]
+      redirect_to root_path
+    end
+    form_params = params["hackvertisement"]
+    new_image = form_params["data"]
+    image_url = @hackvertisement["data"]
+    link = @hackvertisement["link"]
+    if new_image != nil
+      puts "new image!"
+      
+      response = upload_image(new_image)
+      image_url = response["url"]
+    end
+    if form_params["link"] != nil
+      link = form_params["link"]
+    end
+    update_data = {"data": image_url, "link": link}
     respond_to do |format|
-      if @hackvertisement.update(hackvertisement_params)
+      if @hackvertisement.update(update_data)
         format.html { redirect_to @hackvertisement, notice: "Hackvertisement was successfully updated.", status: :see_other }
         format.json { render :show, status: :ok, location: @hackvertisement }
       else
@@ -95,13 +101,25 @@ class HackvertisementsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_hackvertisement
-      @hackvertisement = Hackvertisement.find(params.expect(:id))
+    def upload_image(data)
+      filename = data.original_filename
+      puts "uploading " + filename
+      ext = filename.split(".")[-1]
+      cdn_url = ENV["CDN_BASE_URL"] + "/api/v4/upload"
+      puts "sending to " + cdn_url
+      uri = URI(cdn_url)
+      request = Net::HTTP::Post.new(uri)
+      request['Authorization'] = 'Bearer ' + ENV["CDN_KEY"]
+      form_data = [['file', data.read, {filename: "hackvertisement."+ext}]]
+      request.set_form(form_data, 'multipart/form-data')
+      response = Net::HTTP.start(uri.hostname, uri.port, use_ssl: !Rails.env.development?) do |http|
+        http.request(request)
+      end
+      puts "yay!!!"
+      JSON.parse(response.body)
     end
 
-    # Only allow a list of trusted parameters through.
-    def hackvertisement_params
-      params.expect(hackvertisement: [ :user_id, :date, :data, :link ])
+    def set_hackvertisement
+      @hackvertisement = Hackvertisement.find(params.expect(:id))
     end
 end
