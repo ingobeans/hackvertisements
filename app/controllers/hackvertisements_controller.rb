@@ -2,33 +2,29 @@ require 'net/http'
 
 class HackvertisementsController < ApplicationController
   before_action :check_logged_in
-  before_action :set_hackvertisement, only: %i[ show edit update destroy ]
+  before_action :set_hackvertisement, only: %i[ edit update destroy ]
   before_action :check_user, only: %i[ edit update destroy]
+
+  def show
+    redirect_to root_path
+  end
 
   def wipe
     Hackvertisement.delete_all
     redirect_to root_path
   end
 
-  # GET /hackvertisements or /hackvertisements.json
   def index
     @hackvertisements = Hackvertisement.all
   end
-
-  # GET /hackvertisements/1 or /hackvertisements/1.json
-  def show
-  end
-
-  # GET /hackvertisements/new
+  
   def new
     @hackvertisement = Hackvertisement.new
   end
 
-  # GET /hackvertisements/1/edit
   def edit
   end
 
-  # POST /hackvertisements or /hackvertisements.json
   def create
     data = params.expect(hackvertisement: [ :data, :link ])
     puts data["data"].class
@@ -53,7 +49,6 @@ class HackvertisementsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /hackvertisements/1 or /hackvertisements/1.json
   def update
     form_params = params["hackvertisement"]
     new_image = form_params["data"]
@@ -80,7 +75,6 @@ class HackvertisementsController < ApplicationController
     end
   end
 
-  # DELETE /hackvertisements/1 or /hackvertisements/1.json
   def destroy
     @hackvertisement.destroy!
 
