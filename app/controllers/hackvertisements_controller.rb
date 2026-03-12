@@ -46,7 +46,7 @@ class HackvertisementsController < ApplicationController
 
     respond_to do |format|
       if @hackvertisement.save
-        format.html { redirect_to @hackvertisement, notice: "Hackvertisement was successfully created!" }
+        format.html { redirect_to dashboard_path, notice: "Hackvertisement was successfully created!" }
         format.json { render :show, status: :created, location: @hackvertisement }
       else
         format.html { render :new, status: :unprocessable_entity }
