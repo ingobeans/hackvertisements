@@ -55,6 +55,30 @@ body {
     margin-left: calc(100vw - (100vw - min(790px, 100vw)) / 2);
 }
 
+.user-hackvertisement>a>img {
+    width: 100%;
+}
+
+.user-hackvertisement {
+    background-color: #e5e5e5;
+    width: 722px;
+    max-width: calc(100% - 4px);
+    height: 105px;
+    padding: 5px;
+    margin-bottom: 22px;
+    overflow: hidden;
+    outline: 1px solid black;
+    box-shadow: 6px 6px black;
+}
+
+.user-hackvertisement>a {
+    color: rgb(0, 77, 255);
+}
+
+.user-hackvertisement>a:hover {
+    text-decoration: underline;
+}
+
 .navbar>.linkbutton:hover {
 
     background-color: rgb(32, 32, 32);

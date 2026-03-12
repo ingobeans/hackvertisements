@@ -1,5 +1,16 @@
 <div class="container">
     <div>
         <h1>your hackvertisements:</h1>
+        
+        <div id="hackvertisements">
+        <% Hackvertisement.where(user_id:session[:user_id]["uid"]).each do |hackvertisement| %>
+            <div class="user-hackvertisement">
+                <%= link_to hackvertisement["link"] do  %>
+                    <img src="<%= hackvertisement['data'] %>">
+                <% end %>
+                <%= link_to "click to edit me", hackvertisement  %>
+            </div>
+        <% end %>
+        </div>
     </div>
 </div>
