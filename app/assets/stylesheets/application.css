@@ -34,6 +34,29 @@ body {
     font-style: italic;
 }
 
+.tooltip {
+    text-decoration: underline;
+}
+
+.tooltip>div {
+    display: none;
+    background-color: #f2ffef;
+    position: absolute;
+    width: 220px;
+    padding: 7px;
+    outline: 2px solid black;
+}
+
+.tooltip:hover>div {
+    display: inline-block;
+}
+
+.tooltip:hover>div:hover {
+    display: none;
+    /* so that hovering the tooltip window doesnt keep it open,
+    because then it can get hard to access the input field that is being directly covered by this tooltip. */
+}
+
 .label {
     font-size: 18px;
     line-height: 26px;

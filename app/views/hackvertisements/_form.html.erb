@@ -36,7 +36,7 @@
         <img id="image-showcase" alt="This is an image preview! Your hackvertisement will be previewed here when uploaded :3">
       </div>
       <br>
-      <span class="label">Image </span><span class="label tooltip">[?]</span>
+      <span class="label">Image </span><span class="label tooltip">[?]<div>This is the image that will be shown as your hackvertisement!</div></span>
       <%= form.label :data do %>
         <span class="smol linkbutton">Upload image</span>
       <% end %>
@@ -44,7 +44,7 @@
     </div>
     <br>
     <div>
-      <span class="label">Link </span><span class="label tooltip">[?]</span>
+      <span class="label">Link </span><span class="label tooltip">[?]<div>This is the URL your hackvertisement will link to. This should be the project's repository, demo link, or a Hackclub project link.</div></span>
       <%= form.text_field :link, autocomplete:"off", type:"url" %>
     </div>
     <br>
