@@ -46,7 +46,7 @@ class HackvertisementsController < ApplicationController
 
     respond_to do |format|
       if @hackvertisement.save
-        format.html { redirect_to @hackvertisement, notice: "Hackvertisement was successfully created." }
+        format.html { redirect_to @hackvertisement, notice: "Hackvertisement was successfully created!" }
         format.json { render :show, status: :created, location: @hackvertisement }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -76,7 +76,7 @@ class HackvertisementsController < ApplicationController
     update_data = {"data": image_url, "link": link}
     respond_to do |format|
       if @hackvertisement.update(update_data)
-        format.html { redirect_to @hackvertisement, notice: "Hackvertisement was successfully updated.", status: :see_other }
+        format.html { redirect_to dashboard_path, notice: "Hackvertisement was successfully updated!", status: :see_other }
         format.json { render :show, status: :ok, location: @hackvertisement }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -90,7 +90,7 @@ class HackvertisementsController < ApplicationController
     @hackvertisement.destroy!
 
     respond_to do |format|
-      format.html { redirect_to root_path, notice: "Hackvertisement was successfully destroyed.", status: :see_other }
+      format.html { redirect_to root_path, notice: "Hackvertisement was successfully destroyed!", status: :see_other }
       format.json { head :no_content }
     end
   end
