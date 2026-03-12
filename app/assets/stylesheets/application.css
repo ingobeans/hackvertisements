@@ -23,6 +23,15 @@ body {
     width: 722px;
     height: 84px;
     background-color: #f2ffef;
+    display: inline-block;
+    text-align: center;
+}
+
+#image-showcase::before {
+    font: inherit;
+    display: block !important;
+    margin-top: 30px;
+    font-style: italic;
 }
 
 .label {
