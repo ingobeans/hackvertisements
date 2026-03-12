@@ -196,6 +196,18 @@ input {
     width: 100%;
 }
 
+.user-hackvertisement>form>button {
+    float: right;
+    color: red;
+    display: none;
+    border: none;
+}
+
+.user-hackvertisement>form>button:hover {
+    background: none;
+    text-decoration: underline;
+}
+
 .user-hackvertisement {
     background-color: #e5e5e5;
     width: 722px;

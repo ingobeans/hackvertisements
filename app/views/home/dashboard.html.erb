@@ -21,6 +21,14 @@
                             <%= image_tag("pen.png") %> 
                             click to edit me
                         <% end %>
+                        <a style="float:right; color:red;" onclick="console.log(this);this.nextElementSibling.querySelector('button').style.display = 'unset';this.nextElementSibling.style.display = 'unset'; this.style.display = 'none'">
+                            <%= image_tag("delete.png") %> 
+                            delete
+                        </a>
+                        <%= button_to hackvertisement, method: :delete do %>
+                            <%= image_tag("delete.png") %> 
+                            you sure?
+                        <% end %>
                     </div>
                 <% end %>
             </div>
