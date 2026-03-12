@@ -25,6 +25,12 @@
   </head>
 
   <body>
+    <% if notice != nil and notice != "" %>
+      <div id="notice">
+        <p><%= notice %></p>
+        <button onclick="this.parentElement.remove()">X</button>
+      </div>
+    <% end %>
     <%= render "home/header" %>
     <%= yield %>
   </body>
