@@ -95,7 +95,7 @@ body {
     color: rgb(0, 77, 255);
 }
 
-.user-hackvertisement>a:hover {
+a:hover {
     text-decoration: underline;
 }
 
@@ -118,6 +118,7 @@ body {
 
 .linkbutton:hover {
     background-color: #45c94c;
+    text-decoration: none;
 }
 
 .linkbutton:active {
