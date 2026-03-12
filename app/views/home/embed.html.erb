@@ -6,8 +6,27 @@
     <title>hackvertisements embed</title>
 </head>
 
-<body style="margin:0">
-    <div style="width:722px;max-width:calc(100vw - 4px);height:84px; background-color: #82dcff; border: 2px inset;margin-left: 50%; transform: translateX(-50%);background-image: url('<%= image_path(@entry['data']) %>')"></div>
+<body style="margin:2px;overflow:hidden;">
+    <style>
+        .container {
+            width: 100%;
+            padding-top: 11.63434%;
+            background-color: #a2a2a2;
+            outline: 4px inset;
+            background-size: cover;
+            background-image: url('<%= image_path(@entry['data']) %>')
+        }
+        .container >* {
+            position:  absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+        }
+    </style>
+    <div class="container">
+        <div></div>
+    </div>
 </body>
 
 </html>
