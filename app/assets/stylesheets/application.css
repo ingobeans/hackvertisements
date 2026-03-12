@@ -14,6 +14,61 @@ body {
     margin: 0;
 }
 
+.form-container {
+    background-color: #dce9d9;
+    padding: 20px;
+}
+
+#image-showcase {
+    width: 722px;
+    height: 84px;
+    background-color: #f2ffef;
+}
+
+.label {
+    font-size: 18px;
+    line-height: 26px;
+}
+
+.smol {
+    font-size: 19px !important;
+    padding: 9px !important;
+    padding-top: 4px !important;
+    padding-bottom: 4px !important;
+}
+
+input[type=url],
+input[type=text] {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: inherit;
+    height: 25px;
+}
+
+input[type=url]:focus,
+input[type=text]:focus {
+    outline: none;
+}
+
+input[type="file"]::file-selector-button {
+    border-radius: 0;
+    border: 2px solid black;
+}
+
+input[type="file"]::-webkit-file-name-text {
+    border-radius: 0;
+    border: 2px solid black;
+}
+
+input[type=file] {
+    border: none;
+}
+
+input {
+    border-radius: 0;
+    border: 2px solid black;
+}
+
+
 .navbar {
     background-color: white;
     border-bottom: 1px solid black;
@@ -105,6 +160,7 @@ a:hover {
     width: fit-content;
 }
 
+input[type=submit],
 .linkbutton {
     padding: 15px;
     background-color: #4EE055;
@@ -116,11 +172,13 @@ a:hover {
     border: solid 1px black;
 }
 
+input[type=submit]:hover,
 .linkbutton:hover {
     background-color: #45c94c;
     text-decoration: none;
 }
 
+input[type=submit]:active,
 .linkbutton:active {
     background-color: #2c8b31;
 }
@@ -149,7 +207,8 @@ h1 {
     text-align: center;
 }
 
-p {
+p,
+li {
     font-size: 22px;
     line-height: 30px;
 }

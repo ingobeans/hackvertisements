@@ -10,18 +10,47 @@
       </ul>
     </div>
   <% end %>
+  <hr>
 
-  <div>
-    <%= form.label :link, style: "display: block" %>
-    <%= form.text_field :link %>
-  </div>
+  <script>
+    // Source - https://stackoverflow.com/a/12369027
+    // Posted by ygssoni, modified by community. See post 'Timeline' for change history
+    // Retrieved 2026-03-12, License - CC BY-SA 4.0
 
-  <div>
-    <%= form.label :data, style: "display: block" %>
-    <%= form.file_field :data %>
-  </div>
+    function readURL(input) {
+      if (input.files && input.files[0]) {
+        var reader = new FileReader();
 
-  <div>
-    <%= form.submit %>
+        reader.onload = function (e) {
+          document.getElementById("image-showcase").setAttribute("src",e.target.result)
+        };
+
+        reader.readAsDataURL(input.files[0]);
+      }
+    }
+  </script>
+
+  <div class="form-container">
+    <div>
+      <div class="centered">
+        <img id="image-showcase">
+      </div>
+      <br>
+      <span class="label">Image </span><span class="label tooltip">[?]</span>
+      <%= form.label :data do %>
+        <span class="smol linkbutton">Upload image</span>
+      <% end %>
+      <%= form.file_field :data, style:"display:none", onchange:"readURL(this);" %>
+    </div>
+    <br>
+    <div>
+      <span class="label">Link </span><span class="label tooltip">[?]</span>
+      <%= form.text_field :link, autocomplete:"off", type:"url" %>
+    </div>
+    <br>
+    <br>
+    <div class="centered">
+      <%= form.submit %>
+    </div>
   </div>
 <% end %>

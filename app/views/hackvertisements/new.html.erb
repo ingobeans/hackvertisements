@@ -1,11 +1,18 @@
 <% content_for :title, "New hackvertisement" %>
 
-<h1>New hackvertisement</h1>
-
-<%= render "form", hackvertisement: @hackvertisement %>
-
-<br>
-
-<div>
-  <%= link_to "Back to hackvertisements", hackvertisements_path %>
+<div class="container">
+  <div>
+    <h1>creating a hackvertisement!</h1>
+    <h2 style="margin:0">instructions:</h2>
+    <ol style="margin-top:0">
+      <li>a hackvertisement <strong>must</strong> be of the resolution 722x84.</li>
+      <li>a hackvertisement can be of any image format that works in your browser, however it can not be animated.</li>
+      <li>your hackvertisement should be of a project you really care about!</li>
+    </ol>
+    <hr>
+    <p>With that said, go make your hackvertisement graphic! There's no style rules, so don't be afraid to go crazy and make something really expressive!</p>
+    <p>Your hackvertisement can be edited and deleted after creation, so there's nothing to worry about</p>
+    <%= render "form", hackvertisement: @hackvertisement %>
+    <br>
+  </div>
 </div>
