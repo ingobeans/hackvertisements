@@ -8,19 +8,31 @@ Everything is completely free in every sense of the word and the hackvertisement
 
 ## Running locally
 
-Install Ruby on Rails (good luck).
+1. Install Ruby on Rails (good luck).
 
-Clone this :-)
+2. Clone this :-)
 
-Then i think you need to do `bundle install`.
+3. Then i think you need to do `bundle install`.
 
-Do `rails db:create db:migrate` i think ?
+4. Do `rails db:create db:migrate` i think ?
 
-Then you probably want to set up the .env file! Run `cp .env.example .env`, then open .env and follow the instructions there.
+5. Then you probably want to set up the .env file! Run `cp .env.example .env`, then open .env and follow the instructions there.
 
-And then you can run the server with `rails s` and hope it works!!
+6. And then you can run the server with `rails s` and hope it works!!
 
-There's also a local CDN test server that is used for development to not send requests to the real Hackclub CDN during development.
+### Local CDN
+
+There's a local CDN test server that is used for development to not send requests to the real Hackclub CDN during development. It should be run alongside the main rails server.
 The local CDN test server can be run with python (flask):
 
 `python fake_cdn.py`
+
+Note: make sure you have set `CDN_BASE_URL` in your .env.
+
+### Fake users
+
+There's a python helper script for adding fake users to the db. This is particularly useful if you want to avoid setting up Hackclub authentication, as you can use this with the dev login instead.
+
+Launch it using:
+
+`python fake_user_adder.py`
