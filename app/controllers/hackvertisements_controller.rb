@@ -50,14 +50,10 @@ class HackvertisementsController < ApplicationController
 
     @hackvertisement = Hackvertisement.new({"data": response["url"], "link":link, "user_id":session[:user_id]["uid"]})
 
-    respond_to do |format|
-      if @hackvertisement.save
-        format.html { redirect_to dashboard_path, notice: "Hackvertisement was successfully created!" }
-        format.json { render :show, status: :created, location: @hackvertisement }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @hackvertisement.errors, status: :unprocessable_entity }
-      end
+    if @hackvertisement.save
+      redirect_to dashboard_path, notice: "Hackvertisement was successfully created!"
+    else
+      render new_hackvertisement_path, status: :unprocessable_entity
     end
   end
 
@@ -77,14 +73,14 @@ class HackvertisementsController < ApplicationController
       
       is_image_valid = isImageValid(new_image)
       if is_image_valid[:error] != nil
-        redirect_to edit_hackvertisement_path(@hackvertisement), notice: is_image_valid[:error]
+        redirect_to :edit, notice: is_image_valid[:error]
         return
       end
 
       response = upload_image(is_image_valid[:data],new_image.original_filename)
       
       if response["error"] != nil
-        redirect_to edit_hackvertisement_path(@hackvertisement), notice: "Error uploading image to CDN: " + response["error"]
+        redirect_to :edit, notice: "Error uploading image to CDN: " + response["error"]
         return
       end
       image_url = response["url"]
@@ -94,25 +90,18 @@ class HackvertisementsController < ApplicationController
     end
 
     update_data = {"data": image_url, "link": link}
-    respond_to do |format|
-      if @hackvertisement.update(update_data)
-        format.html { redirect_to dashboard_path, notice: "Hackvertisement was successfully updated!", status: :see_other }
-        format.json { render :show, status: :ok, location: @hackvertisement }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @hackvertisement.errors, status: :unprocessable_entity }
-      end
+    if @hackvertisement.update(update_data)
+      redirect_to dashboard_path, notice: "Hackvertisement was successfully updated!"
+    else
+      render :edit, status: :unprocessable_entity
     end
   end
 
   # destroys a specific hackvertisement
   def destroy
     @hackvertisement.destroy!
-
-    respond_to do |format|
-      format.html { redirect_to dashboard_path, notice: "Hackvertisement was successfully destroyed!", status: :see_other }
-      format.json { head :no_content }
-    end
+    
+    redirect_to dashboard_path, notice: "Hackvertisement was successfully destroyed!"
   end
 
   
@@ -189,7 +178,7 @@ class HackvertisementsController < ApplicationController
 
     def check_user
       if @hackvertisement["user_id"] != session[:user_id]["uid"]
-        redirect_to dashboard_path, notice: "This hackvertisement isn't yours, buckaroo.", status: :see_other
+        redirect_to dashboard_path, notice: "This hackvertisement isn't yours, buckaroo."
       end
     end
 
