@@ -13,12 +13,12 @@
         <h1>hiya!! welcome to hackvertisements!!</h1>
         <p class="subtitle">fun, free showcase of your projects!!</p>
         <hr>
-        <p>Anyone can create and upload a Hackvertisement, hell, you can even upload two!
+        <p>Anyone can create and upload a Hackvertisement, hell, you could make like ten!
         Anyone can also embed a Hackvertisement into their own website, like this: </p>
 
         <iframe style="display:block;width:726px;max-width:100%;border:none;height:88px;margin-left: auto;margin-right: auto;" src="<%= serve_path %>"></iframe>
 
-        <p>Made by: <a href="https://hackclub.enterprise.slack.com/team/U098P9DLUGJ">@iris</a></p>
+        <p style="margin-bottom: 0;">Made by: <a href="https://hackclub.enterprise.slack.com/team/U098P9DLUGJ">@iris</a></p>
 
         <% if !@logged_in %>
             <div class="centered">
@@ -27,6 +27,7 @@
         <% end %>
     </div>
 </div>
+
 <div class="container">
     <div>
         <script>
@@ -43,6 +44,14 @@
         <textarea readonly id="code" style="margin-right:5px;width: 100%;height:39px"><iframe style="display:block;width:726px;max-width:100%;border:none;height:88px;margin-left: auto;margin-right: auto;" src="<%= url_for(only_path: false)+'serve' %>"></iframe></textarea>
         <button onclick="copy()" class="smol linkbutton" style="height: 46px;" onclick="">copy!</button>
         </span>
+    </div>
+</div>
+
+<div class="container">
+    <div>
+        <h2 style="text-align: center;font-size: 28px;">about.</h2>
+        <p>Why hackvertisements? Sometimes I wish there were more places within Hackclub to share projects you really care about and I would also really like to be able to show off other people's cool stuff on my website.</p>
+        <p style="margin-bottom: 0;">This was sort of my solution to that. I really just hope people will use this so I'll have at least a couple of different Hackvertisements to show.</p>
     </div>
 </div>
 
