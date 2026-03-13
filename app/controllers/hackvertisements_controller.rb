@@ -22,16 +22,25 @@ class HackvertisementsController < ApplicationController
   # and creating a database entry.
   def create
     data = params.expect(hackvertisement: [ :data, :link ])
-    puts data["data"].class
-    response = upload_image(data["data"])
-
-    @hackvertisement = Hackvertisement.new({"data": response["url"], "link":data["link"], "user_id":session[:user_id]["uid"]})
-    if session[:user_id]["posts"] == "" or session[:user_id]["posts"] == nil
-      session[:user_id]["posts"] = @hackvertisement["id"]
-    else
-      session[:user_id]["posts"] = session[:user_id]["posts"] + "," + @hackvertisement["id"]
+    
+    if data["data"] == nil
+      redirect_to new_hackvertisement_path, notice: "Missing image"
+      return
     end
-    puts session[:user_id]["posts"] 
+
+    link = data["link"]
+    if is_invalid_url(link)
+      redirect_to new_hackvertisement_path, notice: "Missing or bad link."
+      return
+    end
+
+    response = upload_image(data["data"])
+    if response["error"] != nil
+      redirect_to new_hackvertisement_path, notice: "Error uploading image to CDN: " + response["error"]
+      return
+    end
+
+    @hackvertisement = Hackvertisement.new({"data": response["url"], "link":link, "user_id":session[:user_id]["uid"]})
 
     respond_to do |format|
       if @hackvertisement.save
@@ -107,6 +116,18 @@ class HackvertisementsController < ApplicationController
   end
 
   private
+    def is_invalid_url(link)
+      begin
+        if link == nil or link.blank?
+          return true
+        end
+        uri = URI(link)
+        (uri.scheme != "https") and (uri.scheme != "http")
+      rescue
+        true
+      end
+    end
+
     def check_user
       if @hackvertisement["user_id"] != session[:user_id]["uid"]
         redirect_to dashboard_path, notice: "This hackvertisement isn't yours, buckaroo.", status: :see_other
