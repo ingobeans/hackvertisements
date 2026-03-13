@@ -67,9 +67,14 @@ class HackvertisementsController < ApplicationController
     if new_image != nil
       # new image was specified, upload to CDN and update url
       response = upload_image(new_image)
+      
+      if response["error"] != nil
+        redirect_to new_hackvertisement_path, notice: "Error uploading image to CDN: " + response["error"]
+        return
+      end
       image_url = response["url"]
     end
-    if form_params["link"] != nil
+    if form_params["link"] != nil and not is_invalid_url(form_params["link"])
       link = form_params["link"]
     end
 
