@@ -18,6 +18,7 @@ gem "solid_cable"
 
 gem 'dotenv', '~> 3.2'
 
+gem "fastimage", "~> 2.4"
 
 gem "bootsnap", require: false
 

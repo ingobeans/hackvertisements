@@ -1,4 +1,5 @@
 require 'net/http'
+require "fastimage"
 
 class HackvertisementsController < ApplicationController
   # requires all routes of hackvertisement to be logged in to an account
@@ -31,6 +32,12 @@ class HackvertisementsController < ApplicationController
     link = data["link"]
     if is_invalid_url(link)
       redirect_to new_hackvertisement_path, notice: "Missing or bad link."
+      return
+    end
+
+    is_image_valid = isImageValid(data["data"])
+    if is_image_valid[:error] != nil
+      redirect_to new_hackvertisement_path, notice: is_image_valid[:error]
       return
     end
 
@@ -121,6 +128,37 @@ class HackvertisementsController < ApplicationController
   end
 
   private
+    # checks that an uploaded file is an image,
+    # that it is of the resolution 722x84,
+    # and that it is not animated.
+    # returns json response.
+    def isImageValid(file)
+      allowed_types = ["jpeg","jpg","png"]
+
+      type = FastImage.type(file)
+      if type == nil
+        return {"error":"File is not recognized as an image"}
+      end
+      valid_type = allowed_types.include? type.to_s
+      if not valid_type
+        return {"error":"Image type is not allowed. Allowed types are "+allowed_types.join(", ")}
+      end
+      size = FastImage.size(file)
+      if size != [722,84]
+        return {"error":"Image must be of the size 722x84"}
+      end
+      if type.to_s == "png" and isPngAnimated(file.read)
+        return {"error":"Animated PNGs are not allowed"}
+      end
+      {"success":"yay"}
+    end
+
+    # reads png file data to determine if it is animated
+    def isPngAnimated(data)
+      idat_pos = data.index('IDAT')
+      idat_pos != nil and data[0..idat_pos].index('acTL') != nil 
+    end
+
     def is_invalid_url(link)
       begin
         if link == nil or link.blank?
