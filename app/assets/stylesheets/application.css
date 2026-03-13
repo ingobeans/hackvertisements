@@ -175,6 +175,28 @@ input {
     margin-left: 5px;
 }
 
+/* remove star on smol screen */
+@media (max-width: 980px) {
+    .star {
+        display: none;
+    }
+}
+
+.star {
+    position: absolute;
+    top: 1050px;
+    left: 0;
+    width: 100vw;
+    overflow: hidden;
+    z-index: 500;
+    pointer-events: none;
+}
+
+.star>img {
+    width: 120px;
+    margin-left: calc((100vw - min(790px, 100vw)) / 2 - 85px);
+}
+
 .toadcan {
     position: absolute;
     top: 0;
