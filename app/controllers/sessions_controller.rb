@@ -44,7 +44,7 @@ class SessionsController < ApplicationController
     data = '{
       "client_id": "'+ ENV["CLIENT_ID"]+ '",
       "client_secret": "'+ ENV["CLIENT_SECRET"]+ '",
-      "redirect_uri": "http://localhost:3000/auth/:provider/callback",
+      "redirect_uri": "' + url_for(only_path: false) + '",
       "code": "' + params["code"] + '",
       "grant_type": "authorization_code"
     }'
