@@ -1,22 +1,14 @@
 require 'net/http'
 
 class HackvertisementsController < ApplicationController
+  # requires all routes of hackvertisement to be logged in to an account
   before_action :check_logged_in
+
+  # sets the context for paths related to a specific hackvertisement
   before_action :set_hackvertisement, only: %i[ edit update destroy ]
+
+  # check for /edit, /update and /destroy that the user accesing is the owner of the hackvertisement
   before_action :check_user, only: %i[ edit update destroy]
-
-  def show
-    redirect_to root_path
-  end
-
-  def wipe
-    Hackvertisement.delete_all
-    redirect_to root_path
-  end
-
-  def index
-    @hackvertisements = Hackvertisement.all
-  end
   
   def new
     @hackvertisement = Hackvertisement.new
@@ -25,6 +17,9 @@ class HackvertisementsController < ApplicationController
   def edit
   end
 
+  # endpoint where new hackvertisement forms are sent.
+  # handles verifying user data, uploading the image to the CDN,
+  # and creating a database entry.
   def create
     data = params.expect(hackvertisement: [ :data, :link ])
     puts data["data"].class
@@ -49,20 +44,26 @@ class HackvertisementsController < ApplicationController
     end
   end
 
+  # endpoint where edit hackvertisement forms are sent.
+  # handles verifying user data, uploading a new image to CDN if a new one was specified
+  # and updating the database entry.
   def update
     form_params = params["hackvertisement"]
     new_image = form_params["data"]
+
+    # by default, use previous values.
     image_url = @hackvertisement["data"]
     link = @hackvertisement["link"]
+
     if new_image != nil
-      puts "new image!"
-      
+      # new image was specified, upload to CDN and update url
       response = upload_image(new_image)
       image_url = response["url"]
     end
     if form_params["link"] != nil
       link = form_params["link"]
     end
+
     update_data = {"data": image_url, "link": link}
     respond_to do |format|
       if @hackvertisement.update(update_data)
@@ -75,6 +76,7 @@ class HackvertisementsController < ApplicationController
     end
   end
 
+  # destroys a specific hackvertisement
   def destroy
     @hackvertisement.destroy!
 
@@ -82,6 +84,26 @@ class HackvertisementsController < ApplicationController
       format.html { redirect_to dashboard_path, notice: "Hackvertisement was successfully destroyed!", status: :see_other }
       format.json { head :no_content }
     end
+  end
+
+  
+  # todo: maybe make /show and /index accessible for admin users?
+  # could be a useful tool to have
+  def show
+    # disable standard route for viewing hackvertisement
+    redirect_to root_path
+  end
+
+  def index
+    # disable standard route for hackvertisements index
+    redirect_to root_path
+  end
+
+  def wipe
+    # todo: remove this
+    # (like seriously it would be really bad if it made it to production)
+    Hackvertisement.delete_all
+    redirect_to root_path
   end
 
   private
