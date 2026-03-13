@@ -40,8 +40,9 @@ class HackvertisementsController < ApplicationController
       redirect_to new_hackvertisement_path, notice: is_image_valid[:error]
       return
     end
+    file_data = is_image_valid[:data]
 
-    response = upload_image(data["data"])
+    response = upload_image(file_data,data["data"].original_filename)
     if response["error"] != nil
       redirect_to new_hackvertisement_path, notice: "Error uploading image to CDN: " + response["error"]
       return
@@ -80,7 +81,7 @@ class HackvertisementsController < ApplicationController
         return
       end
 
-      response = upload_image(new_image)
+      response = upload_image(is_image_valid[:data],new_image.original_filename)
       
       if response["error"] != nil
         redirect_to edit_hackvertisement_path(@hackvertisement), notice: "Error uploading image to CDN: " + response["error"]
@@ -139,6 +140,7 @@ class HackvertisementsController < ApplicationController
     # that it is of the resolution 722x84,
     # and that it is not animated.
     # returns json response.
+    # also returns the file data in the 'data' key if it is read. (since file reads exhaust the file object)
     def isImageValid(file)
       allowed_types = ["jpeg","jpg","png"]
 
@@ -154,10 +156,17 @@ class HackvertisementsController < ApplicationController
       if size != [722,84]
         return {"error":"Image must be of the size 722x84"}
       end
-      if type.to_s == "png" and isPngAnimated(file.read)
-        return {"error":"Animated PNGs are not allowed"}
+      file_data = file.read
+      if type.to_s == "png" and isPngAnimated(file_data)
+        return {"error":"Animated PNGs are not allowed","data":file_data}
       end
-      {"success":"yay"}
+
+      # success state!
+      # the file data is returned, as the file data
+      # can only be read once from a single file object,
+      # and since it is used here, the file data also needs
+      # to be returned so that it can be used
+      {"data":file_data}
     end
 
     # reads png file data to determine if it is animated
@@ -190,8 +199,7 @@ class HackvertisementsController < ApplicationController
       end
     end
 
-    def upload_image(data)
-      filename = data.original_filename
+    def upload_image(data,filename)
       puts "uploading " + filename
       ext = filename.split(".")[-1]
       cdn_url = ENV["CDN_BASE_URL"] + "/api/v4/upload"
@@ -199,7 +207,7 @@ class HackvertisementsController < ApplicationController
       uri = URI(cdn_url)
       request = Net::HTTP::Post.new(uri)
       request['Authorization'] = 'Bearer ' + ENV["CDN_KEY"]
-      form_data = [['file', data.read, {filename: "hackvertisement."+ext}]]
+      form_data = [['file', data, {filename: "hackvertisement."+ext}]]
       request.set_form(form_data, 'multipart/form-data')
       response = Net::HTTP.start(uri.hostname, uri.port, use_ssl: !Rails.env.development?) do |http|
         http.request(request)
