@@ -15,6 +15,7 @@ body {
 }
 
 #notice {
+    z-index: 7000;
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
