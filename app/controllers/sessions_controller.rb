@@ -13,23 +13,18 @@ class SessionsController < ApplicationController
       redirect_to root_path
       return
     end
+
     target_uid = params["uid"]
-    puts target_uid
+
+    # find user with that id
     existing_user = User.where(uid:target_uid).first()
     if existing_user == nil
-      puts "naurr!!!! dev login failed cause that user id doesnt belong to a user???"
-      redirect_to root_path
+      redirect_to dashboard_path, notice: "naurr!!!! dev login failed cause that user id doesnt belong to a user???"
       return
     end
-    puts "you're logged in now!! you go girl!"
+    
     session[:user_id] = existing_user
-    redirect_to dashboard_path
-  end
-
-  def wipe
-    # todo: remove this
-    User.delete_all
-    redirect_to root_path
+    redirect_to dashboard_path, notice: "you're logged in now!! you go girl!"
   end
 
   # callback endpoint for the hackclub authentication.
@@ -38,6 +33,11 @@ class SessionsController < ApplicationController
   # sets user session, and updates database entry.
   def create
     puts "hi, im gonna try to authenticate now :3"
+    
+    if params["code"] == nil or params["code"].blank?
+      render json: {error: "Missing authentication code", status: 400}.to_json 
+      return
+    end
 
     # exchange code for token
     uri = URI.parse('https://auth.hackclub.com/oauth/token')
@@ -50,34 +50,60 @@ class SessionsController < ApplicationController
     }'
     headers = {'content-type': 'application/json'}
     res = Net::HTTP.post(uri, data, headers)
-    
-    if res.body.include? "error"
-      render json: {error: "Invalid authentication code", status: 400}.to_json 
-    else
-      # returned data from hackclub auth, containing user token
+
+    token = ""
+
+    # whether the authentication was unsuccesful
+    error = (not (res.kind_of? Net::HTTPSuccess)) or res.body.include? "error"
+
+    if not error
       data = JSON.parse(res.body)
-      
+
+      if data == nil or data["access_token"] == nil
+        # mark authentication as unsuccesful
+        error = true
+      else
+        token = data["access_token"]
+      end
+    end
+
+    if error
+      render json: {error: "Invalid authentication code or authentication server was unreachable (its probably the first option ngl)", status: 400}.to_json 
+    else
       # get the user's slackID from the hackclub auth api
       uri = URI.parse("https://auth.hackclub.com/oauth/userinfo")
-      headers = {'Authorization': 'Bearer ' + data["access_token"]}
+      headers = {'Authorization': 'Bearer ' + token}
 
-      body = Net::HTTP.start(uri.host, uri.port, use_ssl: uri.scheme == 'https') do |http|
+      response = Net::HTTP.start(uri.host, uri.port, use_ssl: uri.scheme == 'https') do |http|
         req = Net::HTTP::Get.new(uri)
-        req['Authorization'] = 'Bearer ' + data["access_token"]
+        req['Authorization'] = 'Bearer ' + token
         response = http.request(req)
-        response.body
+        response
       end
       
+      if not (response.kind_of? Net::HTTPSuccess)
+        render json: {error: "Problem fetching user info", status: 500}.to_json 
+        return
+      end
+
+      body = response.body
       user_data = JSON.parse(body)
 
+      if user_data == nil or user_data["slack_id"] == nil
+        render json: {error: "Bad user info", status: 500}.to_json 
+        return
+      end
+
+      slack_id = user_data["slack_id"]
+
       # try to find existing user
-      existing_user = User.where(uid:user_data["slack_id"]).first()
+      existing_user = User.where(uid:slack_id).first()
 
       if existing_user == nil
         puts "NEW USER ALERT!!!"
         
         # get new user's slack username and profile picture using the cachet api
-        uri = URI.parse("https://cachet.dunkirk.sh/users/"+user_data["slack_id"])
+        uri = URI.parse("https://cachet.dunkirk.sh/users/"+slack_id)
         hostname = uri.hostname
         req = Net::HTTP::Get.new(uri)
         res = Net::HTTP.start(uri.host, uri.port, use_ssl: uri.scheme == 'https') do |http|
@@ -86,7 +112,7 @@ class SessionsController < ApplicationController
         slack_data = JSON.parse(res.body)
         
         # construct the new user :3
-        user = User.new({"uid":user_data["slack_id"], "token":data["access_token"], "name":slack_data["displayName"], "pfp":slack_data["imageUrl"], "posts":""})
+        user = User.new({"uid":slack_id, "token":token, "name":slack_data["displayName"], "pfp":slack_data["imageUrl"], "posts":""})
         session[:user_id] = user
         user.save
       else
@@ -94,8 +120,8 @@ class SessionsController < ApplicationController
         # returning user, only update the token,
         # and log in the user session.
 
-        existing_user["token"] = data["access_token"]
-        
+        existing_user["token"] = token
+
         session[:user_id] = existing_user
         existing_user.save
       end
