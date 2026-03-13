@@ -72,11 +72,18 @@ class HackvertisementsController < ApplicationController
     link = @hackvertisement["link"]
 
     if new_image != nil
-      # new image was specified, upload to CDN and update url
+      # new image was specified, check that it is valid, upload to CDN and update url
+      
+      is_image_valid = isImageValid(new_image)
+      if is_image_valid[:error] != nil
+        redirect_to edit_hackvertisement_path(@hackvertisement), notice: is_image_valid[:error]
+        return
+      end
+
       response = upload_image(new_image)
       
       if response["error"] != nil
-        redirect_to new_hackvertisement_path, notice: "Error uploading image to CDN: " + response["error"]
+        redirect_to edit_hackvertisement_path(@hackvertisement), notice: "Error uploading image to CDN: " + response["error"]
         return
       end
       image_url = response["url"]
