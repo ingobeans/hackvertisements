@@ -15,11 +15,13 @@ class HomeController < ApplicationController
   # serves the random hackvertisement for embeds!
   def serve
     # allow CORS
+    headers['X-Frame-Options'] = 'ALLOWALL'
     headers['Access-Control-Allow-Origin'] = '*'
     headers['Access-Control-Allow-Methods'] = 'GET'
     headers['Access-Control-Request-Method'] = '*'
     headers['Access-Control-Allow-Headers'] = 'Origin, X-Requested-With, Content-Type, Accept, Authorization'
-
+	puts request.headers["referer"]
+	puts "wa"
 
     # pick random entry.
     # i got this code from stack overflow dw i dont know how this works either :3
