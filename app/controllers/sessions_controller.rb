@@ -112,7 +112,7 @@ class SessionsController < ApplicationController
         slack_data = JSON.parse(res.body)
         
         # construct the new user :3
-        user = User.new({"uid":slack_id, "token":token, "name":slack_data["displayName"], "pfp":slack_data["imageUrl"], "posts":""})
+        user = User.new({"uid":slack_id, "token":token, "name":slack_data["displayName"], "pfp":slack_data["imageUrl"]})
         session[:user_id] = user
         user.save
       else

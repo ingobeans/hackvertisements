@@ -10,11 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_03_11_171231) do
+ActiveRecord::Schema[8.1].define(version: 2026_03_13_190959) do
   create_table "hackvertisements", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.string "data"
-    t.date "date"
     t.string "link"
     t.datetime "updated_at", null: false
     t.string "user_id"
@@ -24,7 +23,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_03_11_171231) do
     t.datetime "created_at", null: false
     t.string "name"
     t.string "pfp"
-    t.string "posts"
     t.string "token"
     t.string "uid"
     t.datetime "updated_at", null: false

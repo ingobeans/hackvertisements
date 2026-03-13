@@ -8,7 +8,7 @@ uid = input("enter a uid that you will use to log in with: ")
 
 name = input("enter a username: ")
 
-user = 'User.new({"name":"' + name + '","pfp":"","token":"","uid":"' + uid + '","posts":""}).save()'
+user = 'User.new({"name":"' + name + '","pfp":"","token":"","uid":"' + uid + '"}).save()'
 
 command = "echo " + repr(user) + " | rails console"
 
