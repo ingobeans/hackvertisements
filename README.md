@@ -12,9 +12,9 @@ Everything is completely free in every sense of the word and the hackvertisement
 
 2. Clone this :-)
 
-3. Then i think you need to do `bundle install`.
+3. Then do `bundle install`.
 
-4. Do `rails db:create db:migrate` i think ?
+4. Do `rails db:create db:migrate` to set up the database.
 
 5. Then you probably want to set up the .env file! Run `cp .env.example .env`, then open .env and follow the instructions there.
 
