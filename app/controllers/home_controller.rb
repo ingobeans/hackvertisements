@@ -21,6 +21,11 @@ class HomeController < ApplicationController
     headers['Access-Control-Request-Method'] = '*'
     headers['Access-Control-Allow-Headers'] = 'Origin, X-Requested-With, Content-Type, Accept, Authorization'
 
+    # disable caching
+    response.headers["Cache-Control"] = "no-cache, no-store"
+    response.headers["Pragma"] = "no-cache"
+    response.headers["Expires"] = "Mon, 01 Jan 1990 00:00:00 GMT"
+
     # pick random entry.
     # i got this code from stack overflow dw i dont know how this works either :3
     @entry = Hackvertisement.order("RANDOM()").first
