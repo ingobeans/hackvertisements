@@ -45,6 +45,18 @@ body {
     display: inline;
 }
 
+.leaderboard-entry {
+    border: 1px solid;
+    margin-bottom: 5px;
+    padding: 4px;
+}
+
+.leaderboard-entry>span {
+    margin: 0;
+    padding: 0;
+    font-size: 20px;
+}
+
 .form-container {
     background-color: #dce9d9;
     padding: 20px;
