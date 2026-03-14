@@ -1,0 +1,2 @@
+class Lbentry < ApplicationRecord
+end

@@ -10,6 +10,8 @@ Rails.application.routes.draw do
 
   get '/dashboard', to: 'home#dashboard'
   get '/serve', to: 'home#serve'
+
+  get '/leaderboard', to: 'leaderboard#index'
   
   root "home#index"
 end

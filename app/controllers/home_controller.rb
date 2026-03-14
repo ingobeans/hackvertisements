@@ -21,6 +21,9 @@ class HomeController < ApplicationController
     headers['Access-Control-Request-Method'] = '*'
     headers['Access-Control-Allow-Headers'] = 'Origin, X-Requested-With, Content-Type, Accept, Authorization'
 
+    puts "referer:"
+    puts request.headers["referer"]
+
     # pick random entry.
     # i got this code from stack overflow dw i dont know how this works either :3
     @entry = Hackvertisement.order("RANDOM()").first
