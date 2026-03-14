@@ -43,14 +43,14 @@
         </span>
 
         <script>
-            let code = document.getElementById("code");
+            code = document.getElementById("code");
             function copy() {
                 code.select();
                 code.setSelectionRange(0, 99999);
                 navigator.clipboard.writeText(code.value);
             }
-            let referrerCode = '<iframe referrerpolicy="origin" style="display:block;width:726px;max-width:100%;border:none;height:88px;margin-left: auto;margin-right: auto;" src="<%= url_for(only_path: false)+'serve' %>"></iframe>';
-            let noReferrerCode = '<iframe style="display:block;width:726px;max-width:100%;border:none;height:88px;margin-left: auto;margin-right: auto;" src="<%= url_for(only_path: false)+'serve?anonymous=1' %>"></iframe>';
+            referrerCode = '<iframe referrerpolicy="origin" style="display:block;width:726px;max-width:100%;border:none;height:88px;margin-left: auto;margin-right: auto;" src="<%= url_for(only_path: false)+'serve' %>"></iframe>';
+            noReferrerCode = '<iframe style="display:block;width:726px;max-width:100%;border:none;height:88px;margin-left: auto;margin-right: auto;" src="<%= url_for(only_path: false)+'serve?anonymous=1' %>"></iframe>';
             function updateAnonymousBox(input) {
                 code.value = input.checked ? noReferrerCode : referrerCode;
             }
