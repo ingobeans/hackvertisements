@@ -1,12 +1,13 @@
-<div id="<%= dom_id hackvertisement %>">
+<div id="<%= dom_id hackvertisement %>" style="width:fit-content;">
+  <img class="admin-hackvertisement-image" src="<%= hackvertisement['data'] %>">
+
   <div>
     <strong>User:</strong>
     <%= hackvertisement.user_id %>
-  </div>
-
-  <div>
-    <strong>Date:</strong>
-    <%= hackvertisement.date %>
+    <span style="float:right">
+    <strong>Id: </strong>
+    <%= hackvertisement.id %>
+    </span>
   </div>
 
   <div>

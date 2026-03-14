@@ -1,14 +1,30 @@
 <% content_for :title, "Hackvertisements" %>
 
-<h1>Hackvertisements</h1>
+<style>
+.admin-hackvertisement-entry {  
+  margin-bottom: 10px;
+  border: 1px solid black;
+  padding: 5px;
+  width: fit-content;
+  margin-left:auto;
+  margin-right:auto;
+}
+.admin-hackvertisement-image {
+  height: 4em;
+}
+</style>
 
-<div id="hackvertisements">
-  <% @hackvertisements.each do |hackvertisement| %>
-    <%= render hackvertisement %>
-    <p>
-      <%= link_to "Show this hackvertisement", hackvertisement %>
-    </p>
-  <% end %>
+<div class="container">
+  <div>
+    <h1>admin panel :o</h1>
+
+    <div id="hackvertisements">
+      <% Hackvertisement.all.reverse.each do |hackvertisement| %>
+        <div class="admin-hackvertisement-entry">
+          <%= render hackvertisement %>
+          <%= link_to "Show this hackvertisement", hackvertisement %>
+        </div>
+      <% end %>
+    </div>
+  </div>
 </div>
-
-<%= link_to "New hackvertisement", new_hackvertisement_path %>

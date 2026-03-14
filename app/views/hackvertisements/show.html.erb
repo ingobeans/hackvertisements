@@ -1,17 +1,16 @@
-<img src="<%= @hackvertisement['data'] %>">
+<div class="container">
+  <div>
+    <h2>viewing hackvertisement through admin panel</h2>
+    <%= render @hackvertisement %>
+    <span><strong>Created at</strong>: <pre style="display:inline"><%= @hackvertisement['created_at'] %></pre></span>
+    <br>
+    <br>
 
-<br>
+    <div>
+      <%= link_to "Edit this hackvertisement", edit_hackvertisement_path(@hackvertisement) %> |
+      <%= link_to "Back to hackvertisements", hackvertisements_path %>
 
-<span>Url: <a href="<%= @hackvertisement['link'] %>"><pre style="display:inline"><%= @hackvertisement['link'] %></pre></a></span>
-<br>
-<span>Created at: <pre style="display:inline"><%= @hackvertisement['created_at'] %></pre></span>
-
-<br>
-<br>
-
-<div>
-  <%= link_to "Edit this hackvertisement", edit_hackvertisement_path(@hackvertisement) %> |
-  <%= link_to "Back to hackvertisements", hackvertisements_path %>
-
-  <%= button_to "Destroy this hackvertisement", @hackvertisement, method: :delete %>
+      <%= button_to "Destroy this hackvertisement", @hackvertisement, method: :delete %>
+    </div>
+  </div>
 </div>
