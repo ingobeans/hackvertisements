@@ -1,15 +1,9 @@
+<% content_for :title, "Hackvertisements Leaderboard" %>
+
 <div class="container">
+    <%= link_to "Back", root_path, class:"smol linkbutton", style:"position:absolute;top:2px;left:2px" %>
     <div>
         <h1>leaderboard !</h1>
-
-        <% Lbentry.order("hits DESC").each do |lbentry| %>
-            <% if lbentry["hits"] != nil and lbentry["name"] != nil %>
-                <div class="leaderboard-entry">
-                    <span>Name: <%= lbentry["name"] %></span>
-                    <span style="float:right;">Hits: <%= lbentry["hits"] %></span>
-                </div>
-            <% end %>
-        <% end %>
-
+        <%= render "leaderboard/lb_entries" %>
     </div>
 </div>

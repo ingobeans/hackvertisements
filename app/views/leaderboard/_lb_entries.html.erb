@@ -1,0 +1,8 @@
+<% Lbentry.order("hits DESC").each do |lbentry| %>
+    <% if lbentry["hits"] != nil and lbentry["name"] != nil %>
+        <div class="leaderboard-entry">
+            <span>Name: <%= lbentry["name"] %></span>
+            <span style="float:right;">Hits: <%= lbentry["hits"] %></span>
+        </div>
+    <% end %>
+<% end %>

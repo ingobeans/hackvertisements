@@ -45,6 +45,10 @@ body {
     display: inline;
 }
 
+.back {
+    position: absolute;
+}
+
 .leaderboard-entry {
     border: 1px solid;
     margin-bottom: 5px;
