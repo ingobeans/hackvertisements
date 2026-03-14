@@ -21,13 +21,34 @@ class HomeController < ApplicationController
     headers['Access-Control-Request-Method'] = '*'
     headers['Access-Control-Allow-Headers'] = 'Origin, X-Requested-With, Content-Type, Accept, Authorization'
 
-    puts "referer:"
-    puts request.headers["referer"]
-
     # pick random entry.
     # i got this code from stack overflow dw i dont know how this works either :3
     @entry = Hackvertisement.order("RANDOM()").first
 
     render "embed", :layout => false
+
+    puts "referer:"
+    puts request.headers["referer"]
+    save_to_leaderboard = params["anonymous"] != 1 and not is_invalid_url(request.headers["referer"])
+    puts save_to_leaderboard
+    puts "^save?"
+    if save_to_leaderboard
+      entry = Lbentry.find_or_create_by(name: request.headers["referer"])
+      entry.update({"hits":entry["hits"] == nil ? 1 : entry["hits"]+1})
+      entry.save
+    end
   end
+
+  private
+    def is_invalid_url(link)
+      begin
+        if link == nil or link.blank?
+          return true
+        end
+        uri = URI(link)
+        (uri.scheme != "https") and (uri.scheme != "http")
+      rescue
+        true
+      end
+    end
 end
