@@ -34,7 +34,7 @@ class HomeController < ApplicationController
 
     puts "referer:"
     puts request.headers["referer"]
-    save_to_leaderboard = params["anonymous"] != 1 and not is_invalid_url(request.headers["referer"])
+    save_to_leaderboard = !(params["anonymous"] == "1" or is_invalid_url(request.headers["referer"]))
     puts save_to_leaderboard
     puts "^save?"
     if save_to_leaderboard
