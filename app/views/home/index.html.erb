@@ -24,7 +24,7 @@
         <p style="margin-bottom: 0;">Made by: <a href="https://hackclub.enterprise.slack.com/team/U098P9DLUGJ">@iris</a> - DM me if you have any questions!</p>
 
         <% if !@logged_in %>
-            <div class="centered">
+            <div class="centered" style="margin-top: 20px">
                 <a class="linkbutton" href="http://auth.hackclub.com/oauth/authorize?client_id=<%= ENV['CLIENT_ID'] %>&redirect_uri=<%= CGI.escape(url_for(only_path: false)+'auth/:provider/callback') %>&response_type=code&scope=slack_id+profile+openid">Sign in with Hack club</a>  
             </div> 
         <% end %>
