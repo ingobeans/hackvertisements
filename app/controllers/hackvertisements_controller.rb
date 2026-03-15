@@ -73,14 +73,14 @@ class HackvertisementsController < ApplicationController
       
       is_image_valid = isImageValid(new_image)
       if is_image_valid[:error] != nil
-        redirect_to :edit, notice: "error: "+is_image_valid[:error]
+        redirect_to edit_hackvertisement_path(@hackvertisement), notice: "error: "+is_image_valid[:error]
         return
       end
 
       response = upload_image(is_image_valid[:data],new_image.original_filename)
       
       if response["error"] != nil
-        redirect_to :edit, notice: "error: Error uploading image to CDN: " + response["error"]
+        redirect_to edit_hackvertisement_path(@hackvertisement), notice: "error: Error uploading image to CDN: " + response["error"]
         return
       end
       image_url = response["url"]
@@ -93,7 +93,7 @@ class HackvertisementsController < ApplicationController
     if @hackvertisement.update(update_data)
       redirect_to dashboard_path, notice: "Hackvertisement was successfully updated!"
     else
-      render :edit, status: :unprocessable_entity
+      render edit_hackvertisement_path(@hackvertisement), status: :unprocessable_entity
     end
   end
 
