@@ -16,6 +16,7 @@
         <h1>hiya!! welcome to hackvertisements!!</h1>
         <p class="subtitle">fun, free showcase of your projects!!</p>
         <hr>
+        <p>Hackvertisements are small banner embeds you can add to your website. Every time the page is loaded, it will display a random Hackvertisement submitted by fellow hackclubbers, showcasing off a certified cool project :3</p>
         <p>Anyone can create and upload a Hackvertisement, hell, you could make like ten!
         Anyone can also embed a Hackvertisement into their own website, like this: </p>
 
@@ -24,7 +25,7 @@
         <p style="margin-bottom: 0;">Made by: <a href="https://hackclub.enterprise.slack.com/team/U098P9DLUGJ">@iris</a> - DM me if you have any questions!</p>
 
         <% if !@logged_in %>
-            <div class="centered" style="margin-top: 20px">
+            <div class="centered" style="margin-top: 30px">
                 <a class="linkbutton" href="http://auth.hackclub.com/oauth/authorize?client_id=<%= ENV['CLIENT_ID'] %>&redirect_uri=<%= CGI.escape(url_for(only_path: false)+'auth/:provider/callback') %>&response_type=code&scope=slack_id+profile+openid">Sign in with Hack club</a>  
             </div> 
         <% end %>
