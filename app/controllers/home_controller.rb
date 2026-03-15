@@ -5,7 +5,7 @@ class HomeController < ApplicationController
   end
   def dashboard
     if session[:user_id] == nil
-      redirect_to root_path
+      redirect_to root_path, notice: "error: You have to be logged in to view this page"
     else
       @hackvertisements = Hackvertisement.where(user_id:session[:user_id]["uid"]).reverse
       render "dashboard"

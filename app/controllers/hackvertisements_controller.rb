@@ -25,26 +25,26 @@ class HackvertisementsController < ApplicationController
     data = params.expect(hackvertisement: [ :data, :link ])
     
     if data["data"] == nil
-      redirect_to new_hackvertisement_path, notice: "Missing image"
+      redirect_to new_hackvertisement_path, notice: "error: Missing image"
       return
     end
 
     link = data["link"]
     if is_invalid_url(link)
-      redirect_to new_hackvertisement_path, notice: "Missing or bad link."
+      redirect_to new_hackvertisement_path, notice: "error: Missing or bad link."
       return
     end
 
     is_image_valid = isImageValid(data["data"])
     if is_image_valid[:error] != nil
-      redirect_to new_hackvertisement_path, notice: is_image_valid[:error]
+      redirect_to new_hackvertisement_path, notice: "error: "+ is_image_valid[:error]
       return
     end
     file_data = is_image_valid[:data]
 
     response = upload_image(file_data,data["data"].original_filename)
     if response["error"] != nil
-      redirect_to new_hackvertisement_path, notice: "Error uploading image to CDN: " + response["error"]
+      redirect_to new_hackvertisement_path, notice: "error: Error uploading image to CDN: " + response["error"]
       return
     end
 
@@ -73,14 +73,14 @@ class HackvertisementsController < ApplicationController
       
       is_image_valid = isImageValid(new_image)
       if is_image_valid[:error] != nil
-        redirect_to :edit, notice: is_image_valid[:error]
+        redirect_to :edit, notice: "error: "+is_image_valid[:error]
         return
       end
 
       response = upload_image(is_image_valid[:data],new_image.original_filename)
       
       if response["error"] != nil
-        redirect_to :edit, notice: "Error uploading image to CDN: " + response["error"]
+        redirect_to :edit, notice: "error: Error uploading image to CDN: " + response["error"]
         return
       end
       image_url = response["url"]
@@ -188,7 +188,7 @@ class HackvertisementsController < ApplicationController
     def check_user
       is_root = session[:user_id]["id"] == 1
       if not is_root and @hackvertisement["user_id"] != session[:user_id]["uid"]
-        redirect_to dashboard_path, notice: "This hackvertisement isn't yours, buckaroo."
+        redirect_to dashboard_path, notice: "error: This hackvertisement isn't yours, buckaroo."
       end
     end
 

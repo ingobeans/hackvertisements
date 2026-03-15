@@ -37,6 +37,18 @@ body {
     background-color: #2faf35;
 }
 
+.error {
+    background-color: red !important;
+}
+
+.error>button:hover {
+    background-color: #af2f2f !important;
+}
+
+.error>button {
+    background-color: #951111 !important;
+}
+
 #notice>p {
     text-align: center;
     width: fit-content;

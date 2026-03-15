@@ -19,7 +19,7 @@ class SessionsController < ApplicationController
     # find user with that id
     existing_user = User.where(uid:target_uid).first()
     if existing_user == nil
-      redirect_to dashboard_path, notice: "naurr!!!! dev login failed cause that user id doesnt belong to a user???"
+      redirect_to dashboard_path, notice: "error: naurr!!!! dev login failed cause that user id doesnt belong to a user???"
       return
     end
     
