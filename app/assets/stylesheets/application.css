@@ -20,6 +20,7 @@
     --border-color: black;
     --darkmode-switch-color: white;
     --darkmode-switch-text: white;
+    --dark: 0
 }
 
 .dark-root {
@@ -44,6 +45,7 @@
     --purple-link: #C259FF;
     --darkmode-switch-color: #000;
     --darkmode-switch-text: rgb(255, 255, 255)0;
+    --dark: 1
 }
 
 body {
@@ -51,6 +53,10 @@ body {
     font-family: 'Times New Roman', Times, serif;
     margin: 0;
     color: var(--text-color);
+}
+
+.invert-dark {
+    filter: invert(var(--dark));
 }
 
 #darkmode-switch {
