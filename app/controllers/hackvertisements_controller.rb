@@ -111,7 +111,7 @@ class HackvertisementsController < ApplicationController
     # disable standard route for viewing hackvertisement,
     # unless user is admin
 
-    if session[:user_id]["id"] != 0
+    if session[:user_id]["id"] != 1
       redirect_to root_path
     end
     @hackvertisement = set_hackvertisement
@@ -120,8 +120,8 @@ class HackvertisementsController < ApplicationController
   def index
     # disable standard route for hackvertisements index,
     # unless user is admin
-    
-    if session[:user_id]["id"] != 0
+
+    if session[:user_id]["id"] != 1
       redirect_to root_path
     end
   end
@@ -186,7 +186,7 @@ class HackvertisementsController < ApplicationController
     end
 
     def check_user
-      is_root = session[:user_id]["id"] == 0
+      is_root = session[:user_id]["id"] == 1
       if not is_root and @hackvertisement["user_id"] != session[:user_id]["uid"]
         redirect_to dashboard_path, notice: "This hackvertisement isn't yours, buckaroo."
       end

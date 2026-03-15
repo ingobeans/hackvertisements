@@ -6,7 +6,7 @@
     <%= link_to dashboard_path, id:"dashboard-item" do %>
       <%= image_tag("dashboard.png") %>
       My stuff<% end %>
-    <% if session[:user_id]["id"] == 0 %>
+    <% if session[:user_id]["id"] == 1 %>
     <%= link_to "Admin Panel (you are the root user)", hackvertisements_path, id:"admin-panel-item" %>
     <% end %>
 
