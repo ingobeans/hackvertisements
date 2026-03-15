@@ -29,6 +29,14 @@ The local CDN test server can be run with python (flask):
 
 Note: make sure you have set `CDN_BASE_URL` in your .env.
 
+### Root User
+
+The user with ID 1, usually the first user to ever login, is marked as the "root user". You can tell if you are the root user by whether you have the admin panel in your navbar. The admin panel displays all uploaded hackvertisements with options to edit and delete.
+
+If you want to make a specific user into the root user, there is a helper script for that. Run it with `rails r set_user_as_root.rb`
+
+In case there already exists a root user when that script is run, it will ask if you want to move it to another ID.
+
 ### Fake users
 
 There's a python helper script for adding fake users to the db. This is particularly useful if you want to avoid setting up Hackclub authentication, as you can use this with the dev login instead.
