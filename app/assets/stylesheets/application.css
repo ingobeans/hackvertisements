@@ -17,12 +17,65 @@
     --sad-button-active: rgb(45, 43, 54);
     --blue-link: rgb(0, 77, 255);
     --purple-link: #A100FF;
+    --border-color: black;
+    --darkmode-switch-color: white;
+    --darkmode-switch-text: white;
+}
+
+.dark-root {
+    --border-color: #303030;
+    --bg-color: #1c1c1c;
+    --ok-green: #4ee055;
+    --ok-green-hover: #2faf35;
+    --ok-green-active: #119517;
+    --link-button-hover: #45c94c;
+    --link-button-active: #2c8b31;
+    --error: red;
+    --error-darker: #af2f2f;
+    --error-darkest: #951111;
+    --container: #161616;
+    --focused-container: #232222;
+    --text-color: #bebebe;
+    --contrast-text-color: #161616;
+    --sad-button: #f9f8ff;
+    --sad-button-hover: rgb(228, 227, 238);
+    --sad-button-active: rgb(197, 197, 212);
+    --blue-link: rgb(107, 152, 255);
+    --purple-link: #C259FF;
+    --darkmode-switch-color: #000;
+    --darkmode-switch-text: rgb(255, 255, 255)0;
 }
 
 body {
     background-color: var(--bg-color);
     font-family: 'Times New Roman', Times, serif;
     margin: 0;
+    color: var(--text-color);
+}
+
+#darkmode-switch {
+    height: 26px;
+    min-width: 23px;
+    background-color: var(--darkmode-switch-color);
+    border: 1px solid var(--border-color);
+    color: var(--darkmode-switch-text);
+    font-size: 16px;
+    text-align: center;
+}
+
+#darkmode-item {
+    float: right;
+    font-size: 22px;
+    margin-right: 10px;
+    background-color: var(--contrast-text-color);
+    padding: 2px;
+    margin-top: 6px;
+}
+
+.darkmode-switch-container {
+    position: absolute;
+    top: 0;
+    right: 10px;
 }
 
 #notice {
@@ -32,13 +85,13 @@ body {
     transform: translateX(-50%);
     background-color: var(--ok-green);
     padding: 12px;
-    outline: 2px var(--text-color) solid;
+    outline: 2px var(--border-color) solid;
     top: 30px;
 }
 
 #notice>button {
     border-radius: 0;
-    border: 1px solid var(--text-color);
+    border: 1px solid var(--border-color);
     background-color: var(--ok-green-active);
     color: var(--contrast-text-color);
     transform: translateY(-1px);
@@ -73,7 +126,7 @@ body {
 }
 
 .leaderboard-entry {
-    border: 1px solid;
+    border: 1px solid var(--border-color);
     margin-bottom: 5px;
     padding: 4px;
 }
@@ -114,7 +167,7 @@ body {
     position: absolute;
     width: 220px;
     padding: 7px;
-    outline: 2px solid var(--text-color);
+    outline: 2px solid var(--border-color);
 }
 
 .tooltip:hover>div {
@@ -153,12 +206,12 @@ input[type=text]:focus {
 
 input[type="file"]::file-selector-button {
     border-radius: 0;
-    border: 2px solid var(--text-color);
+    border: 2px solid var(--border-color);
 }
 
 input[type="file"]::-webkit-file-name-text {
     border-radius: 0;
-    border: 2px solid var(--text-color);
+    border: 2px solid var(--border-color);
 }
 
 input[type=file] {
@@ -167,13 +220,13 @@ input[type=file] {
 
 input {
     border-radius: 0;
-    border: 2px solid var(--text-color);
+    border: 2px solid var(--border-color);
 }
 
 
 .navbar {
     background-color: var(--contrast-text-color);
-    border-bottom: 1px solid var(--text-color);
+    border-bottom: 1px solid var(--border-color);
     height: 48px;
 }
 
@@ -279,8 +332,8 @@ input {
     padding: 5px;
     margin-bottom: 22px;
     overflow: hidden;
-    outline: 1px solid var(--text-color);
-    box-shadow: 6px 6px var(--text-color);
+    outline: 1px solid var(--border-color);
+    box-shadow: 6px 6px black;
 }
 
 .user-hackvertisement>a {
@@ -305,8 +358,8 @@ input[type=submit],
     font-family: Arial, Helvetica, sans-serif;
     border-radius: 10px;
     font-size: 22px;
-    box-shadow: 4px 4px var(--text-color);
-    border: solid 1px var(--text-color);
+    box-shadow: 4px 4px black;
+    border: solid 1px var(--border-color);
 }
 
 input[type=submit]:hover,
@@ -327,7 +380,7 @@ input[type=submit]:active,
 
 .container {
     background-color: var(--container);
-    outline: solid 2px var(--text-color);
+    outline: solid 2px var(--border-color);
     width: 100%;
     max-width: 846px;
     padding: 0;

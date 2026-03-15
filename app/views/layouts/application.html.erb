@@ -20,6 +20,13 @@
     <%# Includes all stylesheet files in app/assets/stylesheets %>
     <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
+
+    <script>
+        dark = localStorage.getItem("dark") == "true";
+        if (dark) {
+          document.documentElement.classList.add('dark-root')
+        }
+    </script>
   </head>
 
   <body>
@@ -31,5 +38,18 @@
     <% end %>
     <%= render "home/header" %>
     <%= yield %>
+    <script defer>
+      darkmodeButton = document.getElementById("darkmode-switch");
+      darkmodeButton.checked = dark;
+      darkmodeButton.addEventListener("click", (event) => {
+          dark = !dark;
+          localStorage.setItem("dark", dark);
+          if (dark) {
+            document.documentElement.classList.add('dark-root')
+          } else {
+            document.documentElement.classList.remove('dark-root')
+          }
+      })
+    </script>
   </body>
 </html>

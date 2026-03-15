@@ -16,6 +16,10 @@
         <img src="<%= session[:user_id]["pfp"]  %>">
       <% end %>
     </div>
+    <div id="darkmode-item">
+      <label for="darkmode-switch">Darkmode</label>
+      <button id="darkmode-switch">X</button>
+    </div>
   </div>
 
   <style>
@@ -23,4 +27,8 @@
       margin-top: 65px;
     }
   </style>
+<% else %>
+  <div class="darkmode-switch-container">
+    <label for="darkmode-switch">Darkmode</label><button id="darkmode-switch">X</button>
+  </div>
 <% end %>
