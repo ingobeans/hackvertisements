@@ -1,15 +1,26 @@
-/*
- * This is a manifest file that'll be compiled into application.css.
- *
- * With Propshaft, assets are served efficiently without preprocessing steps. You can still include
- * application-wide styles in this file, but keep in mind that CSS precedence will follow the standard
- * cascading order, meaning styles declared later in the document or manifest will override earlier ones,
- * depending on specificity.
- *
- * Consider organizing styles into separate files for maintainability.
- */
+:root {
+    --bg-color: #CECDFF;
+    --ok-green: #4ee055;
+    --ok-green-hover: #2faf35;
+    --ok-green-active: #119517;
+    --link-button-hover: #45c94c;
+    --link-button-active: #2c8b31;
+    --error: red;
+    --error-darker: #af2f2f;
+    --error-darkest: #951111;
+    --container: #f2ffef;
+    --focused-container: #dce9d9;
+    --text-color: black;
+    --contrast-text-color: white;
+    --sad-button: black;
+    --sad-button-hover: rgb(32, 32, 32);
+    --sad-button-active: rgb(45, 43, 54);
+    --blue-link: rgb(0, 77, 255);
+    --purple-link: #A100FF;
+}
+
 body {
-    background-color: #CECDFF;
+    background-color: var(--bg-color);
     font-family: 'Times New Roman', Times, serif;
     margin: 0;
 }
@@ -19,40 +30,40 @@ body {
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
-    background-color: #4ee055;
+    background-color: var(--ok-green);
     padding: 12px;
-    outline: 2px black solid;
+    outline: 2px var(--text-color) solid;
     top: 30px;
 }
 
 #notice>button {
     border-radius: 0;
-    border: 1px solid black;
-    background-color: #119517;
-    color: white;
+    border: 1px solid var(--text-color);
+    background-color: var(--ok-green-active);
+    color: var(--contrast-text-color);
     transform: translateY(-1px);
 }
 
 #notice>button:hover {
-    background-color: #2faf35;
+    background-color: var(--ok-green-hover);
 }
 
 .error {
-    background-color: red !important;
+    background-color: var(--error) !important;
 }
 
 .error>button:hover {
-    background-color: #af2f2f !important;
+    background-color: var(--error-darker) !important;
 }
 
 .error>button {
-    background-color: #951111 !important;
+    background-color: var(--error-darkest) !important;
 }
 
 #notice>p {
     text-align: center;
     width: fit-content;
-    color: white;
+    color: var(--contrast-text-color);
     margin: 0;
     display: inline;
 }
@@ -74,14 +85,14 @@ body {
 }
 
 .form-container {
-    background-color: #dce9d9;
+    background-color: var(--focused-container);
     padding: 20px;
 }
 
 #image-showcase {
     width: 722px;
     height: 84px;
-    background-color: #f2ffef;
+    background-color: var(--container);
     display: inline-block;
     text-align: center;
 }
@@ -99,11 +110,11 @@ body {
 
 .tooltip>div {
     display: none;
-    background-color: #f2ffef;
+    background-color: var(--container);
     position: absolute;
     width: 220px;
     padding: 7px;
-    outline: 2px solid black;
+    outline: 2px solid var(--text-color);
 }
 
 .tooltip:hover>div {
@@ -142,12 +153,12 @@ input[type=text]:focus {
 
 input[type="file"]::file-selector-button {
     border-radius: 0;
-    border: 2px solid black;
+    border: 2px solid var(--text-color);
 }
 
 input[type="file"]::-webkit-file-name-text {
     border-radius: 0;
-    border: 2px solid black;
+    border: 2px solid var(--text-color);
 }
 
 input[type=file] {
@@ -156,13 +167,13 @@ input[type=file] {
 
 input {
     border-radius: 0;
-    border: 2px solid black;
+    border: 2px solid var(--text-color);
 }
 
 
 .navbar {
-    background-color: white;
-    border-bottom: 1px solid black;
+    background-color: var(--contrast-text-color);
+    border-bottom: 1px solid var(--text-color);
     height: 48px;
 }
 
@@ -183,18 +194,18 @@ input {
     padding-right: 8px;
     padding-right: 15px;
     float: right;
-    background-color: black;
+    background-color: var(--sad-button);
     box-shadow: none;
 }
 
 .navbar>div>.linkbutton:hover {
 
-    background-color: rgb(32, 32, 32);
+    background-color: var(--sad-button-hover);
 }
 
 .navbar>div>.linkbutton:active {
 
-    background-color: rgb(45, 43, 54);
+    background-color: var(--sad-button-active);
 }
 
 .navbar>div>.linkbutton>img {
@@ -249,7 +260,7 @@ input {
 
 .user-hackvertisement>form>button {
     float: right;
-    color: red;
+    color: var(--error);
     display: none;
     border: none;
     cursor: pointer;
@@ -261,19 +272,19 @@ input {
 }
 
 .user-hackvertisement {
-    background-color: #e5e5e5;
+    background-color: var(--focused-container);
     width: 722px;
     max-width: calc(100% - 4px);
     height: 105px;
     padding: 5px;
     margin-bottom: 22px;
     overflow: hidden;
-    outline: 1px solid black;
-    box-shadow: 6px 6px black;
+    outline: 1px solid var(--text-color);
+    box-shadow: 6px 6px var(--text-color);
 }
 
 .user-hackvertisement>a {
-    color: rgb(0, 77, 255);
+    color: var(--blue-link);
 }
 
 a:hover {
@@ -289,24 +300,24 @@ a:hover {
 input[type=submit],
 .linkbutton {
     padding: 15px;
-    background-color: #4EE055;
-    color: white;
+    background-color: var(--ok-green);
+    color: var(--contrast-text-color);
     font-family: Arial, Helvetica, sans-serif;
     border-radius: 10px;
     font-size: 22px;
-    box-shadow: 4px 4px black;
-    border: solid 1px black;
+    box-shadow: 4px 4px var(--text-color);
+    border: solid 1px var(--text-color);
 }
 
 input[type=submit]:hover,
 .linkbutton:hover {
-    background-color: #45c94c;
+    background-color: var(--link-button-hover);
     text-decoration: none;
 }
 
 input[type=submit]:active,
 .linkbutton:active {
-    background-color: #2c8b31;
+    background-color: var(--link-button-active);
 }
 
 .container>div {
@@ -315,8 +326,8 @@ input[type=submit]:active,
 }
 
 .container {
-    background-color: #F2FFEF;
-    outline: solid 2px black;
+    background-color: var(--container);
+    outline: solid 2px var(--text-color);
     width: 100%;
     max-width: 846px;
     padding: 0;
@@ -346,5 +357,5 @@ li {
 
 a {
     text-decoration: none;
-    color: #A100FF;
+    color: var(--purple-link);
 }
