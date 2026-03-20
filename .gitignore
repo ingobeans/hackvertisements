@@ -36,3 +36,6 @@
 venv/
 fake_cdn/
 !.env.example
+
+# i know you dont need to but i want to anyway :sob:
+config/credentials.yml.enc
