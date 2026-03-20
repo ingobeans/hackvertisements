@@ -33,12 +33,13 @@ class HomeController < ApplicationController
     render "embed", :layout => false
 
     puts "referer:"
-    puts request.headers["referer"]
-    save_to_leaderboard = !(params["anonymous"] == "1" or is_invalid_url(request.headers["referer"]))
+    ref = request.headers["referer"]
+    puts ref
+    save_to_leaderboard = !(params["anonymous"] == "1" or is_invalid_url(ref))
     puts save_to_leaderboard
     puts "^save?"
     if save_to_leaderboard
-      entry = Lbentry.find_or_create_by(name: request.headers["referer"])
+      entry = Lbentry.find_or_create_by(name: ref.delete_prefix("https://").delete_prefix("http://").delete_suffix("/"))
       entry.update({"hits":entry["hits"] == nil ? 1 : entry["hits"]+1})
       entry.save
     end
