@@ -273,6 +273,17 @@ input {
     margin-left: 5px;
 }
 
+.hackclub-flag {
+    position: absolute;
+    top: 0;
+    left: 10px;
+    z-index: 10;
+}
+
+.hackclub-flag>img {
+    width: 120px;
+}
+
 /* remove star on smol screen */
 @media (max-width: 980px) {
     .star {
