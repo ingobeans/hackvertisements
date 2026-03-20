@@ -14,13 +14,27 @@
             height: calc(11.63434vw - 4px);
             background-color: #a2a2a2;
             outline: 2px inset black;
-            background-size: cover;
-            background-image: url('<%= image_path(@entry['data']) %>');
             text-decoration: none;
         }
+        #main {
+            background-size: cover;
+            background-image: url('<%= image_path(@entry['data']) %>');
+            width:100%;
+            height:100%;
+            display:block;
+        }
+        #flag {
+            position:absolute;
+            top:calc(11.63434vw - 4px - 22px);
+        }
+        #flag:hover {
+            filter: brightness(0.7);
+        }
     </style>
-    <a class="container" href="<%= @entry['link'] %>">
-    </a>
+    <div class="container">
+        <a id="main" href="<%= @entry['link'] %>"></a>
+        <a id="flag" href="<%= root_url %>"><img src="./flag.png"></a>
+    </div>
 </body>
 
 </html>
