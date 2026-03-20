@@ -148,6 +148,13 @@ body {
     padding: 20px;
 }
 
+.image-showcase-flag {
+    pointer-events: none;
+    position: absolute;
+    top: calc(84px - 22px);
+    left: 0;
+}
+
 #image-showcase {
     width: 722px;
     height: 84px;
