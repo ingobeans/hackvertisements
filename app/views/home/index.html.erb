@@ -20,7 +20,7 @@
         <p>Anyone can create and upload a Hackvertisement, hell, you could make like ten!
         Anyone can also embed a Hackvertisement into their own website, like this: </p>
 
-        <iframe referrerpolicy="origin" style="display:block;width:726px;max-width:100%;border:none;height:88px;margin-left: auto;margin-right: auto;" src="<%= serve_path %>"></iframe>
+        <iframe referrerpolicy="origin" style="margin-bottom:15px; display:block;width:726px;max-width:100%;border:none;height:84px;margin-left: auto;margin-right: auto;" src="<%= serve_path %>"></iframe>
 
         <span style="font-size: 22px;">Made by: <a href="https://hackclub.enterprise.slack.com/team/U098P9DLUGJ">@iris</a> - DM me if you have any questions!</span>
         <span style="float:right">
@@ -43,7 +43,7 @@
         
         <span>Anonymous </span><span class="label tooltip">[?]<div>Enabling this will opt out of the leaderboard and referrer URL will not be sent.</div></span><input autocomplete=off id="anonymous-box" type="checkbox" onchange="updateAnonymousBox(this)">
         <span style="width:100%;display:flex;">
-        <textarea autocomplete=off readonly id="code" style="margin-right:5px;width: 100%;height:39px"><iframe referrerpolicy="origin" style="display:block;width:726px;max-width:100%;border:none;height:88px;margin-left: auto;margin-right: auto;" src="<%= url_for(only_path: false)+'serve' %>"></iframe></textarea>
+        <textarea autocomplete=off readonly id="code" style="margin-right:5px;width: 100%;height:39px"><iframe referrerpolicy="origin" style="display:block;width:726px;max-width:100%;border:none;height:84px;margin-left: auto;margin-right: auto;" src="<%= url_for(only_path: false)+'serve' %>"></iframe></textarea>
         <button onclick="copy()" class="smol linkbutton" style="height: 46px;" onclick="">copy!</button>
         </span>
 
@@ -54,8 +54,8 @@
                 code.setSelectionRange(0, 99999);
                 navigator.clipboard.writeText(code.value);
             }
-            referrerCode = '<iframe referrerpolicy="origin" style="display:block;width:726px;max-width:100%;border:none;height:88px;margin-left: auto;margin-right: auto;" src="<%= url_for(only_path: false)+'serve' %>"></iframe>';
-            noReferrerCode = '<iframe style="display:block;width:726px;max-width:100%;border:none;height:88px;margin-left: auto;margin-right: auto;" src="<%= url_for(only_path: false)+'serve?anonymous=1' %>"></iframe>';
+            referrerCode = '<iframe referrerpolicy="origin" style="display:block;width:726px;max-width:100%;border:none;height:84px;margin-left: auto;margin-right: auto;" src="<%= url_for(only_path: false)+'serve' %>"></iframe>';
+            noReferrerCode = '<iframe style="display:block;width:726px;max-width:100%;border:none;height:84px;margin-left: auto;margin-right: auto;" src="<%= url_for(only_path: false)+'serve?anonymous=1' %>"></iframe>';
             function updateAnonymousBox(input) {
                 code.value = input.checked ? noReferrerCode : referrerCode;
             }
