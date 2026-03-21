@@ -105,8 +105,6 @@ class HackvertisementsController < ApplicationController
   end
 
   
-  # todo: maybe make /show and /index accessible for admin users?
-  # could be a useful tool to have
   def show
     # disable standard route for viewing hackvertisement,
     # unless user is admin
@@ -124,13 +122,6 @@ class HackvertisementsController < ApplicationController
     if session[:user_id]["id"] != 1
       redirect_to root_path
     end
-  end
-
-  def wipe
-    # todo: remove this
-    # (like seriously it would be really bad if it made it to production)
-    Hackvertisement.delete_all
-    redirect_to root_path
   end
 
   private
