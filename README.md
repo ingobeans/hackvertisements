@@ -8,6 +8,8 @@ Hackvertisements are small banner embeds you can add to your website. Every time
 
 Everything is completely free in every sense of the word and the hackvertisements may not be commercial in any way. This is **not** a place to advertise your vibecoded business. This is however a place for you to showcase that project you're super passionate about!!
 
+<video width="430" src="https://github.com/user-attachments/assets/d316c5c3-0271-425e-8383-48f243fb0428"></video>
+
 ## Running locally
 
 1. Install Ruby on Rails (good luck).
