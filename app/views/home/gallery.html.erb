@@ -1,0 +1,17 @@
+<% content_for :title, "Hackvertisements Gallery" %>
+
+<style>
+    body {
+        background-color: var(--contrast-text-color);
+    }
+</style>
+
+<h1 style="margin-bottom:0">gallery !! </h1>
+<p style="text-align:center;margin-top:0;">here are all submitted hackvertisements!! <%= link_to "Back", root_path, class:"smol linkbutton" %></p>
+<div class="gallery">
+    <% Hackvertisement.all.reverse.each do |hackvertisement| %>
+    <div class="gallery-entry">
+        <a href="<%= hackvertisement.link %>"><img src="<%= hackvertisement.data %>"></a>
+    </div>
+    <% end %>
+</div>

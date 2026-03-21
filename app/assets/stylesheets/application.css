@@ -55,6 +55,21 @@ body {
     color: var(--text-color);
 }
 
+.gallery {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: center;
+    gap: 10px;
+}
+
+.gallery-entry {
+    display: inline-block;
+    height: 84px;
+    border: 2px inset black;
+}
+
 .invert-dark {
     filter: invert(var(--dark));
 }

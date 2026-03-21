@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get '/gallery', to: 'home#gallery'
   resources :hackvertisements
   get "up" => "rails/health#show", as: :rails_health_check
 
