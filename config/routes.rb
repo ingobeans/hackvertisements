@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   get '/gallery', to: 'home#gallery'
   resources :hackvertisements
 
+  get '/api', to: 'api#index'
   get '/api/fetch', to: 'api#fetch'
   get '/api/fetch_url', to: 'api#fetch_url'
   get '/serve', to: 'api#serve'

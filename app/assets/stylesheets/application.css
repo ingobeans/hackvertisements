@@ -55,6 +55,14 @@ body {
     color: var(--text-color);
 }
 
+.endpoint {
+    width: 100%;
+    background-color: var(--container);
+    outline: solid 2px var(--border-color);
+    padding: 5px;
+    margin-bottom: 10px;
+}
+
 .gallery {
     display: flex;
     flex-direction: row;

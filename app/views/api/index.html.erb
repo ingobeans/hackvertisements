@@ -1,0 +1,37 @@
+<% content_for :title, "Hackvertisements Api Docs" %>
+
+<style>
+    body {
+        background-color: var(--contrast-text-color);
+    }
+    li {
+        font-size:unset !important;
+        line-height:unset !important;
+    }
+</style>
+
+<h1 style="margin-bottom:0">api documentation. </h1>
+<div class="centered">
+    <p style="margin-top:0;">welcome to the docs! there are currently 2 different api endpoints. <%= link_to "Back", root_path, class:"smol linkbutton" %></p>
+    <p>The available endpoints are:</p>
+    <div class="endpoint">
+        <pre>/api/fetch</pre>
+        <span>Fetches the image data of a random Hackvertisement. Note: This requires redirects to be enbabled.</span>
+        <br>
+        <br>
+        <span>Optional Parameter: 
+        <ul><li>
+            <code>referer</code> - if included, counts this request for the leaderboard with the specified referer.<br>Example: <code><%= api_fetch_url %>?refer=example.com</code></span>
+        </li></ul>
+    </div>
+    <div class="endpoint">
+        <pre>/api/fetch_url</pre>
+        <span>Fetches the image URL to a random Hackvertisement.</span>
+        <br>
+        <br>
+        <span>Optional Parameter: 
+        <ul><li>
+            <code>referer</code> - if included, counts this request for the leaderboard with the specified referer.<br>Example: <code><%= api_fetch_url_url %>?refer=example.com</code></span>
+        </li></ul>
+    </div>
+</div>

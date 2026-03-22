@@ -1,11 +1,15 @@
 class ApiController < ApplicationController
-    before_action :set_cors
+    before_action :set_cors, except: :index
     before_action :get_entry, only: %i[ fetch fetch_url serve]
     before_action :save_lb, only: %i[ fetch fetch_url]
+
+    def index
+    end
 
     def fetch
         redirect_to @entry.data, allow_other_host: true
     end
+
     def fetch_url
         render plain: @entry.data
     end
