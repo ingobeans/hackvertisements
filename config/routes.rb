@@ -1,7 +1,11 @@
 Rails.application.routes.draw do
   get '/gallery', to: 'home#gallery'
-  get '/api/fetch', to: 'home#fetch'
   resources :hackvertisements
+
+  get '/api/fetch', to: 'api#fetch'
+  get '/api/fetch_url', to: 'api#fetch_url'
+  get '/serve', to: 'api#serve'
+
   get "up" => "rails/health#show", as: :rails_health_check
 
   get '/auth/dev', to: 'sessions#dev'
@@ -9,7 +13,6 @@ Rails.application.routes.draw do
   get '/auth/:provider/callback', to: 'sessions#create'
 
   get '/dashboard', to: 'home#dashboard'
-  get '/serve', to: 'home#serve'
 
   get '/leaderboard', to: 'leaderboard#index'
   
