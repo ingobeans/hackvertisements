@@ -11,12 +11,12 @@
 </style>
 
 <h1 style="margin-bottom:0">api documentation. </h1>
-<div class="centered">
+<div class="centered" style="max-width: 885px;">
     <p style="margin-top:0;">welcome to the docs! there are currently 2 different api endpoints. <%= link_to "Back", root_path, class:"smol linkbutton" %></p>
     <p>The available endpoints are:</p>
     <div class="endpoint">
         <pre>/api/fetch</pre>
-        <span>Fetches the image data of a random Hackvertisement. Note: This requires redirects to be enbabled.</span>
+        <span>Fetches the image data of a random Hackvertisement. Note: This requires redirects to be enbabled. For many request libraries this is enabled by default, but for usage with for example <code>CURL</code>, the <code>-L</code> flag has to be set.</span>
         <br>
         <br>
         <span>Optional Parameter: 
